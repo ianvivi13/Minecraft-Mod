@@ -15,8 +15,37 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        // region Ores
         blockWithItem(ModBlocks.RAW_SILVER_BLOCK);
         blockWithItem(ModBlocks.SILVER_BLOCK);
+        blockWithItem(ModBlocks.SILVER_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_SILVER_ORE);
+
+        blockWithItem(ModBlocks.RAW_LEAD_BLOCK);
+        blockWithItem(ModBlocks.LEAD_BLOCK);
+        blockWithItem(ModBlocks.LEAD_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_LEAD_ORE);
+
+        blockWithItem(ModBlocks.RAW_TITANIUM_BLOCK);
+        blockWithItem(ModBlocks.TITANIUM_BLOCK);
+        blockWithItem(ModBlocks.TITANIUM_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_TITANIUM_ORE);
+
+        blockWithItem(ModBlocks.RAW_TIN_BLOCK);
+        blockWithItem(ModBlocks.TIN_BLOCK);
+        blockWithItem(ModBlocks.TIN_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_TIN_ORE);
+
+        blockWithItem(ModBlocks.RAW_ZINC_BLOCK);
+        blockWithItem(ModBlocks.ZINC_BLOCK);
+        blockWithItem(ModBlocks.ZINC_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_ZINC_ORE);
+
+        blockWithItem(ModBlocks.RAW_MAGNESIUM_BLOCK);
+        blockWithItem(ModBlocks.MAGNESIUM_BLOCK);
+        blockWithItem(ModBlocks.MAGNESIUM_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_MAGNESIUM_ORE);
+        // endregion
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

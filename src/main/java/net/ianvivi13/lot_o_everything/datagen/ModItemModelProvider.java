@@ -19,6 +19,16 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(ModItems.RAW_SILVER);
         simpleItem(ModItems.SILVER_INGOT);
+        simpleItem(ModItems.RAW_LEAD);
+        simpleItem(ModItems.LEAD_INGOT);
+        simpleItem(ModItems.RAW_TITANIUM);
+        simpleItem(ModItems.TITANIUM_INGOT);
+        simpleItem(ModItems.RAW_TIN);
+        simpleItem(ModItems.TIN_INGOT);
+        simpleItem(ModItems.RAW_ZINC);
+        simpleItem(ModItems.ZINC_INGOT);
+        simpleItem(ModItems.RAW_MAGNESIUM);
+        simpleItem(ModItems.MAGNESIUM_INGOT);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

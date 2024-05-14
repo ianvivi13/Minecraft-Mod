@@ -17,20 +17,42 @@ public class ModCreativeModeTabs {
 
     // Create tabs here
 
-    public static final RegistryObject<CreativeModeTab> RAW_MINERALS_TAB = CREATIVE_MODE_TABS.register("raw_minerals_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(Items.RAW_GOLD))
-                    .title(Component.translatable("creativetab.raw_minerals_tab"))
+    public static final RegistryObject<CreativeModeTab> MODDED_ORES_TAB = CREATIVE_MODE_TABS.register("modded_ores_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.RAW_SILVER.get()))
+                    .title(Component.translatable("creativetab.modded_ores_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         // Add items to tab
 
-                        pOutput.accept(Items.RAW_COPPER);
-                        pOutput.accept(Items.RAW_IRON);
-                        pOutput.accept(Items.RAW_GOLD);
                         pOutput.accept(ModItems.RAW_SILVER.get());
-                        pOutput.accept(Items.RAW_COPPER_BLOCK);
-                        pOutput.accept(Items.RAW_IRON_BLOCK);
-                        pOutput.accept(Items.RAW_GOLD_BLOCK);
                         pOutput.accept(ModBlocks.RAW_SILVER_BLOCK.get());
+                        pOutput.accept(ModBlocks.SILVER_BLOCK.get());
+                        pOutput.accept(ModBlocks.SILVER_ORE.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_SILVER_ORE.get());
+                        pOutput.accept(ModItems.RAW_LEAD.get());
+                        pOutput.accept(ModBlocks.RAW_LEAD_BLOCK.get());
+                        pOutput.accept(ModBlocks.LEAD_BLOCK.get());
+                        pOutput.accept(ModBlocks.LEAD_ORE.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_LEAD_ORE.get());
+                        pOutput.accept(ModItems.RAW_TITANIUM.get());
+                        pOutput.accept(ModBlocks.RAW_TITANIUM_BLOCK.get());
+                        pOutput.accept(ModBlocks.TITANIUM_BLOCK.get());
+                        pOutput.accept(ModBlocks.TITANIUM_ORE.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_TITANIUM_ORE.get());
+                        pOutput.accept(ModItems.RAW_TIN.get());
+                        pOutput.accept(ModBlocks.RAW_TIN_BLOCK.get());
+                        pOutput.accept(ModBlocks.TIN_BLOCK.get());
+                        pOutput.accept(ModBlocks.TIN_ORE.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_TIN_ORE.get());
+                        pOutput.accept(ModItems.RAW_ZINC.get());
+                        pOutput.accept(ModBlocks.RAW_ZINC_BLOCK.get());
+                        pOutput.accept(ModBlocks.ZINC_BLOCK.get());
+                        pOutput.accept(ModBlocks.ZINC_ORE.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_ZINC_ORE.get());
+                        pOutput.accept(ModItems.RAW_MAGNESIUM.get());
+                        pOutput.accept(ModBlocks.RAW_MAGNESIUM_BLOCK.get());
+                        pOutput.accept(ModBlocks.MAGNESIUM_BLOCK.get());
+                        pOutput.accept(ModBlocks.MAGNESIUM_ORE.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get());
 
                     })
                     .build());
