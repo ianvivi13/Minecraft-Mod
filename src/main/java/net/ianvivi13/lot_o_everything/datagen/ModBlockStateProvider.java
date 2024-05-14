@@ -45,6 +45,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.MAGNESIUM_BLOCK);
         blockWithItem(ModBlocks.MAGNESIUM_ORE);
         blockWithItem(ModBlocks.DEEPSLATE_MAGNESIUM_ORE);
+
+        blockWithItem(ModBlocks.RUBY_BLOCK);
+        blockWithItem(ModBlocks.RUBY_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_RUBY_ORE);
+
+        blockWithItem(ModBlocks.SAPPHIRE_BLOCK);
+        blockWithItem(ModBlocks.SAPPHIRE_ORE);
+        blockWithItem(ModBlocks.DEEPSLATE_SAPPHIRE_ORE);
         // endregion
     }
 

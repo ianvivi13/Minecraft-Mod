@@ -59,6 +59,16 @@ public class ModRecipeProvider extends RecipeProvider {
 
         nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RAW_MAGNESIUM.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_MAGNESIUM_BLOCK.get());
         nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.MAGNESIUM_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.MAGNESIUM_BLOCK.get());
+
+        oreSmelting(pRecipeOutput, List.of(ModItems.RUBY.get(), ModBlocks.RUBY_ORE.get(), ModBlocks.DEEPSLATE_RUBY_ORE.get()), RecipeCategory.MISC, ModItems.RUBY.get(), 1.0F, 200, "ruby");
+        oreBlasting(pRecipeOutput, List.of(ModItems.RUBY.get(), ModBlocks.RUBY_ORE.get(), ModBlocks.DEEPSLATE_RUBY_ORE.get()), RecipeCategory.MISC, ModItems.RUBY.get(), 1.0F, 100, "ruby");
+
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RUBY.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBY_BLOCK.get());
+
+        oreSmelting(pRecipeOutput, List.of(ModItems.SAPPHIRE.get(), ModBlocks.SAPPHIRE_ORE.get(), ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get()), RecipeCategory.MISC, ModItems.SAPPHIRE.get(), 1.0F, 200, "sapphire");
+        oreBlasting(pRecipeOutput, List.of(ModItems.SAPPHIRE.get(), ModBlocks.SAPPHIRE_ORE.get(), ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get()), RecipeCategory.MISC, ModItems.SAPPHIRE.get(), 1.0F, 100, "sapphire");
+
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.SAPPHIRE.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SAPPHIRE_BLOCK.get());
         // endregion
         // region Quality of Life
         oreSmelting(pRecipeOutput, List.of(Items.RAW_COPPER_BLOCK), RecipeCategory.MISC, Items.COPPER_BLOCK, 0.7F * 9, 200, "copper_block");

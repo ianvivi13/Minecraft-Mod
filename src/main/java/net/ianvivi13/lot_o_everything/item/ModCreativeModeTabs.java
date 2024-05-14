@@ -53,6 +53,14 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.MAGNESIUM_BLOCK.get());
                         pOutput.accept(ModBlocks.MAGNESIUM_ORE.get());
                         pOutput.accept(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get());
+                        pOutput.accept(ModItems.RUBY.get());
+                        pOutput.accept(ModBlocks.RUBY_BLOCK.get());
+                        pOutput.accept(ModBlocks.RUBY_ORE.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_RUBY_ORE.get());
+                        pOutput.accept(ModItems.SAPPHIRE.get());
+                        pOutput.accept(ModBlocks.SAPPHIRE_BLOCK.get());
+                        pOutput.accept(ModBlocks.SAPPHIRE_ORE.get());
+                        pOutput.accept(ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get());
 
                     })
                     .build());

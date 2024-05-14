@@ -1,10 +1,10 @@
 import re
 
-inputString = '''   oreSmelting(pRecipeOutput, List.of(ModBlocks.RAW_SILVER_BLOCK.get()), RecipeCategory.MISC, ModBlocks.SILVER_BLOCK.get(), 0.7F * 9, 200, "silver_block");
-        oreBlasting(pRecipeOutput, List.of(ModBlocks.RAW_SILVER_BLOCK.get()), RecipeCategory.MISC, ModBlocks.SILVER_BLOCK.get(), 0.7F * 9, 100, "silver_block");
-        '''
-wordToSearch = "SILVER"
-replaceWith = ["LEAD", "TITANIUM", "TIN", "ZINC", "MAGNESIUM"]
+inputString = '''   "block.lot_o_everything.magnesium_block": "Block of Magnesium",
+  "block.lot_o_everything.magnesium_ore": "Magnesium Ore",
+  "block.lot_o_everything.deepslate_magnesium_ore": "Deepslate Magnesium Ore",'''
+wordToSearch = "MAGNESIUM"
+replaceWith = ["RUBY", "SAPPHIRE"]
 
 for word in replaceWith:
     newString = inputString

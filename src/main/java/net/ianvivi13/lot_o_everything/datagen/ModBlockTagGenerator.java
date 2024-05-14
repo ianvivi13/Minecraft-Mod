@@ -46,7 +46,13 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.RAW_MAGNESIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_ORE.get())
-                .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get());
+                .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
+                .add(ModBlocks.RUBY_BLOCK.get())
+                .add(ModBlocks.RUBY_ORE.get())
+                .add(ModBlocks.DEEPSLATE_RUBY_ORE.get())
+                .add(ModBlocks.SAPPHIRE_BLOCK.get())
+                .add(ModBlocks.SAPPHIRE_ORE.get())
+                .add(ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get());
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.RAW_TITANIUM_BLOCK.get())
@@ -66,7 +72,13 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.RAW_MAGNESIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_ORE.get())
-                .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get());
+                .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
+                .add(ModBlocks.RUBY_BLOCK.get())
+                .add(ModBlocks.RUBY_ORE.get())
+                .add(ModBlocks.DEEPSLATE_RUBY_ORE.get())
+                .add(ModBlocks.SAPPHIRE_BLOCK.get())
+                .add(ModBlocks.SAPPHIRE_ORE.get())
+                .add(ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get());
 
         this.tag(BlockTags.NEEDS_STONE_TOOL)
                 .add(ModBlocks.RAW_LEAD_BLOCK.get())
