@@ -1,9 +1,7 @@
 import re
 
-inputString = '''   "block.lot_o_everything.magnesium_block": "Block of Magnesium",
-  "block.lot_o_everything.magnesium_ore": "Magnesium Ore",
-  "block.lot_o_everything.deepslate_magnesium_ore": "Deepslate Magnesium Ore",'''
-wordToSearch = "MAGNESIUM"
+inputString = '''   public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_SILVER_ORE = registerKey("add_overworld_silver_ore");'''
+wordToSearch = "SILVER"
 replaceWith = ["RUBY", "SAPPHIRE"]
 
 for word in replaceWith:
