@@ -13,6 +13,8 @@
   "item.lot_o_everything.magnesium_ingot": "Magnesium Ingot",
   "item.lot_o_everything.ruby": "Ruby",
   "item.lot_o_everything.sapphire": "Sapphire",
+  "item.lot_o_everything.ice_boat": "Ice Boat",
+  "item.lot_o_everything.ice_chest_boat": "Ice Chest Boat",
 
   "block.lot_o_everything.raw_silver_block": "Block of Raw Silver",
   "block.lot_o_everything.silver_block": "Block of Silver",
@@ -44,6 +46,15 @@
   "block.lot_o_everything.sapphire_block": "Block of Sapphire",
   "block.lot_o_everything.sapphire_ore": "Sapphire Ore",
   "block.lot_o_everything.deepslate_sapphire_ore": "Deepslate Sapphire Ore",
+  "block.lot_o_everything.ice_log": "Ice Log",
+  "block.lot_o_everything.stripped_ice_log": "Stripped Ice Log",
+  "block.lot_o_everything.ice_wood": "Ice Wood",
+  "block.lot_o_everything.stripped_ice_wood": "Stripped Ice Wood",
+  "block.lot_o_everything.ice_planks": "Ice Planks",
+  "block.lot_o_everything.ice_leaves": "Ice Leaves",
 
-  "creativetab.modded_ores_tab": "Modded Ores"
+  "entity.lot_o_everything.mod_chest_boat": "Boat with Chest",
+
+  "creativetab.modded_ores_tab": "Modded Ores",
+  "creativetab.modded_wood_tab": "Modded Wood Stuff"
 }

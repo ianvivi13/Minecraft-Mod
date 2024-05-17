@@ -89,5 +89,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.TIN_BLOCK.get())
                 .add(ModBlocks.TIN_ORE.get())
                 .add(ModBlocks.DEEPSLATE_TIN_ORE.get());
+
+        this.tag(BlockTags.LOGS_THAT_BURN);
+
+        this.tag(BlockTags.PLANKS)
+                .add(ModBlocks.ICE_PLANKS.get());
+
+
     }
 }

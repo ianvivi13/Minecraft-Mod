@@ -1,6 +1,8 @@
 package net.ianvivi13.lot_o_everything.item;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
+import net.ianvivi13.lot_o_everything.entity.custom.ModBoatEntity;
+import net.ianvivi13.lot_o_everything.item.custom.ModBoatItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -41,6 +43,12 @@ public class ModItems {
     public static final RegistryObject<Item> SAPPHIRE = ITEMS.register("sapphire",
             () -> new Item(new Item.Properties()));
 
+    // endregion
+    // region Wood Stuff
+    public static final RegistryObject<Item> ICE_BOAT = ITEMS.register("ice_boat",
+            () -> new ModBoatItem(false, ModBoatEntity.Type.ICE, new Item.Properties()));
+    public static final RegistryObject<Item> ICE_CHEST_BOAT = ITEMS.register("ice_chest_boat",
+            () -> new ModBoatItem(true, ModBoatEntity.Type.ICE, new Item.Properties()));
     // endregion
 
     public static void register(IEventBus eventBus) {

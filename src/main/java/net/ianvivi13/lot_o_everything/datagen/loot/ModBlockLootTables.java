@@ -65,6 +65,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get(),
                 block -> createOreDrop(ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get(), ModItems.SAPPHIRE.get()));
         // endregion
+        // region Wood Stuff
+        this.dropWhenSilkTouch(ModBlocks.ICE_LOG.get());
+        this.dropWhenSilkTouch(ModBlocks.STRIPPED_ICE_LOG.get());
+        this.dropWhenSilkTouch(ModBlocks.ICE_WOOD.get());
+        this.dropWhenSilkTouch(ModBlocks.STRIPPED_ICE_WOOD.get());
+        this.dropWhenSilkTouch(ModBlocks.ICE_PLANKS.get());
+        this.add(ModBlocks.ICE_LEAVES.get(), block ->
+                createLeavesDrops(ModBlocks.ICE_LEAVES.get(), ModBlocks.TITANIUM_BLOCK.get(), NORMAL_LEAVES_SAPLING_CHANCES)); // Change to sapling
+        // endregion
     }
 
     @Override

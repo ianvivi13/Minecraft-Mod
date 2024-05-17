@@ -31,6 +31,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MAGNESIUM_INGOT);
         simpleItem(ModItems.RUBY);
         simpleItem(ModItems.SAPPHIRE);
+
+        simpleItem(ModItems.ICE_BOAT);
+        simpleItem(ModItems.ICE_CHEST_BOAT);
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

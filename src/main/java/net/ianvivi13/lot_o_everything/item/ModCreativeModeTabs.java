@@ -65,6 +65,23 @@ public class ModCreativeModeTabs {
                     })
                     .build());
 
+    public static final RegistryObject<CreativeModeTab> MODDED_WOOD_TAB = CREATIVE_MODE_TABS.register("modded_wood_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.ICE_LOG.get()))
+                    .title(Component.translatable("creativetab.modded_wood_tab"))
+                    .displayItems((pParameters, pOutput) -> {
+                        // Add items to tab
+
+                        pOutput.accept(ModBlocks.ICE_LOG.get());
+                        pOutput.accept(ModBlocks.STRIPPED_ICE_LOG.get());
+                        pOutput.accept(ModBlocks.ICE_WOOD.get());
+                        pOutput.accept(ModBlocks.STRIPPED_ICE_WOOD.get());
+                        pOutput.accept(ModBlocks.ICE_PLANKS.get());
+                        pOutput.accept(ModBlocks.ICE_LEAVES.get());
+                        pOutput.accept(ModItems.ICE_BOAT.get());
+                        pOutput.accept(ModItems.ICE_CHEST_BOAT.get());
+                    })
+                    .build());
+
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);
     }
