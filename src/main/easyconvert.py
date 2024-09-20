@@ -1,8 +1,8 @@
 import re
 
-inputString = '''   public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_SILVER_ORE = registerKey("add_overworld_silver_ore");'''
-wordToSearch = "SILVER"
-replaceWith = ["RUBY", "SAPPHIRE"]
+inputString = '''   AllDefaultOreRecipes(pRecipeOutput, ModBlocks.TITANIUM_ORE.get(), ModBlocks.DEEPSLATE_TITANIUM_ORE.get(), ModItems.RAW_TITANIUM.get(), ModItems.TITANIUM_INGOT.get(), 1.2F, ModBlocks.RAW_TITANIUM_BLOCK.get(), ModBlocks.TITANIUM_BLOCK.get());'''
+wordToSearch = "TITANIUM"
+replaceWith = ["TIN", "MAGNESIUM", "ZINC", "RUBY", "SAPPHIRE"]
 
 for word in replaceWith:
     newString = inputString

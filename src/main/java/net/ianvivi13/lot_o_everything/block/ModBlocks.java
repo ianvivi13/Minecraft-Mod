@@ -1,16 +1,31 @@
 package net.ianvivi13.lot_o_everything.block;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
+import net.ianvivi13.lot_o_everything.block.custom.ModIceLeavesBlock;
+import net.ianvivi13.lot_o_everything.block.custom.ModIceRotatedPillarBlock;
 import net.ianvivi13.lot_o_everything.item.ModItems;
+import net.minecraft.core.BlockPos;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.IceBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -127,6 +142,81 @@ public class ModBlocks {
     // endregion
     // endregion
 
+    // region Wood Stuff
+    public static final RegistryObject<Block> ICE_LOG = registerBlock("ice_log",
+            () -> new ModIceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)
+                    .mapColor(MapColor.ICE)
+                    .friction(0.98F)
+                    .randomTicks()
+                    .strength(0.5F)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .isValidSpawn((p_187426_, p_187427_, p_187428_, p_187429_) -> p_187429_ == EntityType.POLAR_BEAR)
+                    .isRedstoneConductor(ModBlocks::never)));
+
+    public static final RegistryObject<Block> STRIPPED_ICE_LOG = registerBlock("stripped_ice_log",
+            () -> new ModIceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
+                    .mapColor(MapColor.ICE)
+                    .friction(0.98F)
+                    .randomTicks()
+                    .strength(0.5F)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .isValidSpawn((p_187426_, p_187427_, p_187428_, p_187429_) -> p_187429_ == EntityType.POLAR_BEAR)
+                    .isRedstoneConductor(ModBlocks::never)));
+
+    public static final RegistryObject<Block> ICE_WOOD = registerBlock("ice_wood",
+            () -> new ModIceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)
+                    .mapColor(MapColor.ICE)
+                    .friction(0.98F)
+                    .randomTicks()
+                    .strength(0.5F)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .isValidSpawn((p_187426_, p_187427_, p_187428_, p_187429_) -> p_187429_ == EntityType.POLAR_BEAR)
+                    .isRedstoneConductor(ModBlocks::never)));
+
+    public static final RegistryObject<Block> STRIPPED_ICE_WOOD = registerBlock("stripped_ice_wood",
+            () -> new ModIceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)
+                    .mapColor(MapColor.ICE)
+                    .friction(0.98F)
+                    .randomTicks()
+                    .strength(0.5F)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .isValidSpawn((p_187426_, p_187427_, p_187428_, p_187429_) -> p_187429_ == EntityType.POLAR_BEAR)
+                    .isRedstoneConductor(ModBlocks::never)));
+
+    public static final RegistryObject<Block> ICE_PLANKS = registerBlock("ice_planks",
+            () -> new IceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)
+                    .mapColor(MapColor.ICE)
+                    .friction(0.98F)
+                    .randomTicks()
+                    .strength(0.5F)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .isValidSpawn((p_187426_, p_187427_, p_187428_, p_187429_) -> p_187429_ == EntityType.POLAR_BEAR)
+                    .isRedstoneConductor(ModBlocks::never)) {
+                @Override
+                public void playerDestroy(Level pLevel, Player pPlayer, BlockPos pPos, BlockState pState, @Nullable BlockEntity pTe, ItemStack pStack) {
+                    pPlayer.awardStat(Stats.BLOCK_MINED.get(this));
+                    pPlayer.causeFoodExhaustion(0.005F);
+                    dropResources(pState, pLevel, pPos, pTe, pPlayer, pStack, false);
+                }
+            });
+
+    public static final RegistryObject<Block> ICE_LEAVES = registerBlock("ice_leaves",
+            () -> new ModIceLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
+                    .mapColor(MapColor.ICE)
+                    .friction(0.98F)
+                    .randomTicks()
+                    .strength(0.5F)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .isRedstoneConductor(ModBlocks::never)));
+
+    // endregion
+
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
@@ -137,6 +227,10 @@ public class ModBlocks {
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    private static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {
+        return false;
     }
 
     public static void register(IEventBus eventBus) {

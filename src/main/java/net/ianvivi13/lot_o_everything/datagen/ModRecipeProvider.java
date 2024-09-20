@@ -3,17 +3,20 @@ package net.ianvivi13.lot_o_everything.datagen;
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
 import net.ianvivi13.lot_o_everything.block.ModBlocks;
 import net.ianvivi13.lot_o_everything.item.ModItems;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends RecipeProvider {
@@ -24,51 +27,17 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput pRecipeOutput) {
         // region Ores
-        oreSmelting(pRecipeOutput, List.of(ModItems.RAW_SILVER.get(), ModBlocks.SILVER_ORE.get(), ModBlocks.DEEPSLATE_SILVER_ORE.get()), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 1.0F, 200, "silver_ingot");
-        oreBlasting(pRecipeOutput, List.of(ModItems.RAW_SILVER.get(), ModBlocks.SILVER_ORE.get(), ModBlocks.DEEPSLATE_SILVER_ORE.get()), RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), 1.0F, 100, "silver_ingot");
-
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RAW_SILVER.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_SILVER_BLOCK.get());
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.SILVER_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SILVER_BLOCK.get());
-
-        oreSmelting(pRecipeOutput, List.of(ModItems.RAW_LEAD.get(), ModBlocks.LEAD_ORE.get(), ModBlocks.DEEPSLATE_LEAD_ORE.get()), RecipeCategory.MISC, ModItems.LEAD_INGOT.get(), 0.7F, 200, "lead_ingot");
-        oreBlasting(pRecipeOutput, List.of(ModItems.RAW_LEAD.get(), ModBlocks.LEAD_ORE.get(), ModBlocks.DEEPSLATE_LEAD_ORE.get()), RecipeCategory.MISC, ModItems.LEAD_INGOT.get(), 0.7F, 100, "lead_ingot");
-
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RAW_LEAD.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_LEAD_BLOCK.get());
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.LEAD_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.LEAD_BLOCK.get());
-
-        oreSmelting(pRecipeOutput, List.of(ModItems.RAW_TITANIUM.get(), ModBlocks.TITANIUM_ORE.get(), ModBlocks.DEEPSLATE_TITANIUM_ORE.get()), RecipeCategory.MISC, ModItems.TITANIUM_INGOT.get(), 1.2F, 200, "titanium_ingot");
-        oreBlasting(pRecipeOutput, List.of(ModItems.RAW_TITANIUM.get(), ModBlocks.TITANIUM_ORE.get(), ModBlocks.DEEPSLATE_TITANIUM_ORE.get()), RecipeCategory.MISC, ModItems.TITANIUM_INGOT.get(), 1.2F, 100, "titanium_ingot");
-
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RAW_TITANIUM.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_TITANIUM_BLOCK.get());
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.TITANIUM_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.TITANIUM_BLOCK.get());
-
-        oreSmelting(pRecipeOutput, List.of(ModItems.RAW_TIN.get(), ModBlocks.TIN_ORE.get(), ModBlocks.DEEPSLATE_TIN_ORE.get()), RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.2F, 200, "tin_ingot");
-        oreBlasting(pRecipeOutput, List.of(ModItems.RAW_TIN.get(), ModBlocks.TIN_ORE.get(), ModBlocks.DEEPSLATE_TIN_ORE.get()), RecipeCategory.MISC, ModItems.TIN_INGOT.get(), 0.2F, 100, "tin_ingot");
-
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RAW_TIN.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_TIN_BLOCK.get());
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.TIN_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.TIN_BLOCK.get());
-
-        oreSmelting(pRecipeOutput, List.of(ModItems.RAW_ZINC.get(), ModBlocks.ZINC_ORE.get(), ModBlocks.DEEPSLATE_ZINC_ORE.get()), RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 200, "zinc_ingot");
-        oreBlasting(pRecipeOutput, List.of(ModItems.RAW_ZINC.get(), ModBlocks.ZINC_ORE.get(), ModBlocks.DEEPSLATE_ZINC_ORE.get()), RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), 0.7F, 100, "zinc_ingot");
-
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RAW_ZINC.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_ZINC_BLOCK.get());
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.ZINC_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.ZINC_BLOCK.get());
-
-        oreSmelting(pRecipeOutput, List.of(ModItems.RAW_MAGNESIUM.get(), ModBlocks.MAGNESIUM_ORE.get(), ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get()), RecipeCategory.MISC, ModItems.MAGNESIUM_INGOT.get(), 0.7F, 200, "magnesium_ingot");
-        oreBlasting(pRecipeOutput, List.of(ModItems.RAW_MAGNESIUM.get(), ModBlocks.MAGNESIUM_ORE.get(), ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get()), RecipeCategory.MISC, ModItems.MAGNESIUM_INGOT.get(), 0.7F, 100, "magnesium_ingot");
-
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RAW_MAGNESIUM.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_MAGNESIUM_BLOCK.get());
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.MAGNESIUM_INGOT.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.MAGNESIUM_BLOCK.get());
-
-        oreSmelting(pRecipeOutput, List.of(ModItems.RUBY.get(), ModBlocks.RUBY_ORE.get(), ModBlocks.DEEPSLATE_RUBY_ORE.get()), RecipeCategory.MISC, ModItems.RUBY.get(), 1.0F, 200, "ruby");
-        oreBlasting(pRecipeOutput, List.of(ModItems.RUBY.get(), ModBlocks.RUBY_ORE.get(), ModBlocks.DEEPSLATE_RUBY_ORE.get()), RecipeCategory.MISC, ModItems.RUBY.get(), 1.0F, 100, "ruby");
-
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.RUBY.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.RUBY_BLOCK.get());
-
-        oreSmelting(pRecipeOutput, List.of(ModItems.SAPPHIRE.get(), ModBlocks.SAPPHIRE_ORE.get(), ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get()), RecipeCategory.MISC, ModItems.SAPPHIRE.get(), 1.0F, 200, "sapphire");
-        oreBlasting(pRecipeOutput, List.of(ModItems.SAPPHIRE.get(), ModBlocks.SAPPHIRE_ORE.get(), ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get()), RecipeCategory.MISC, ModItems.SAPPHIRE.get(), 1.0F, 100, "sapphire");
-
-        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, ModItems.SAPPHIRE.get(), RecipeCategory.BUILDING_BLOCKS, ModBlocks.SAPPHIRE_BLOCK.get());
+        AllDefaultOreRecipes(pRecipeOutput, ModBlocks.SILVER_ORE.get(), ModBlocks.DEEPSLATE_SILVER_ORE.get(), ModItems.RAW_SILVER.get(), ModItems.SILVER_INGOT.get(), 1.0F, ModBlocks.RAW_SILVER_BLOCK.get(), ModBlocks.SILVER_BLOCK.get());
+        AllDefaultOreRecipes(pRecipeOutput, ModBlocks.LEAD_ORE.get(), ModBlocks.DEEPSLATE_LEAD_ORE.get(), ModItems.RAW_LEAD.get(), ModItems.LEAD_INGOT.get(), 0.7F, ModBlocks.RAW_LEAD_BLOCK.get(), ModBlocks.LEAD_BLOCK.get());
+        AllDefaultOreRecipes(pRecipeOutput, ModBlocks.TITANIUM_ORE.get(), ModBlocks.DEEPSLATE_TITANIUM_ORE.get(), ModItems.RAW_TITANIUM.get(), ModItems.TITANIUM_INGOT.get(), 1.2F, ModBlocks.RAW_TITANIUM_BLOCK.get(), ModBlocks.TITANIUM_BLOCK.get());
+        AllDefaultOreRecipes(pRecipeOutput, ModBlocks.TIN_ORE.get(), ModBlocks.DEEPSLATE_TIN_ORE.get(), ModItems.RAW_TIN.get(), ModItems.TIN_INGOT.get(), 0.2F, ModBlocks.RAW_TIN_BLOCK.get(), ModBlocks.TIN_BLOCK.get());
+        AllDefaultOreRecipes(pRecipeOutput, ModBlocks.MAGNESIUM_ORE.get(), ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get(), ModItems.RAW_MAGNESIUM.get(), ModItems.MAGNESIUM_INGOT.get(), 0.7F, ModBlocks.RAW_MAGNESIUM_BLOCK.get(), ModBlocks.MAGNESIUM_BLOCK.get());
+        AllDefaultOreRecipes(pRecipeOutput, ModBlocks.ZINC_ORE.get(), ModBlocks.DEEPSLATE_ZINC_ORE.get(), ModItems.RAW_ZINC.get(), ModItems.ZINC_INGOT.get(), 0.7F, ModBlocks.RAW_ZINC_BLOCK.get(), ModBlocks.ZINC_BLOCK.get());
+        AllDefaultOreRecipes(pRecipeOutput, ModBlocks.RUBY_ORE.get(), ModBlocks.DEEPSLATE_RUBY_ORE.get(), ModItems.RUBY.get(), 1.0F, ModBlocks.RUBY_BLOCK.get());
+        AllDefaultOreRecipes(pRecipeOutput, ModBlocks.SAPPHIRE_ORE.get(), ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get(), ModItems.SAPPHIRE.get(), 1.0F, ModBlocks.SAPPHIRE_BLOCK.get());
+        // endregion
+        // region Wood Stuff
+        Door(pRecipeOutput, ModBlocks.TITANIUM_BLOCK.get(), ModBlocks.ICE_PLANKS.get());
         // endregion
         // region Quality of Life
         oreSmelting(pRecipeOutput, List.of(Items.RAW_COPPER_BLOCK), RecipeCategory.MISC, Items.COPPER_BLOCK, 0.7F * 9, 200, "copper_block");
@@ -98,6 +67,7 @@ public class ModRecipeProvider extends RecipeProvider {
         oreSmelting(pRecipeOutput, List.of(ModBlocks.RAW_MAGNESIUM_BLOCK.get()), RecipeCategory.MISC, ModBlocks.MAGNESIUM_BLOCK.get(), 0.7F * 9, 200, "magnesium_block");
         oreBlasting(pRecipeOutput, List.of(ModBlocks.RAW_MAGNESIUM_BLOCK.get()), RecipeCategory.MISC, ModBlocks.MAGNESIUM_BLOCK.get(), 0.7F * 9, 100, "magnesium_block");
         // endregion
+
     }
 
     protected static void oreSmelting(RecipeOutput pRecipeOutput, List<ItemLike> pIngredients, RecipeCategory pCategory, ItemLike pResult, float pExperience, int pCookingTime, String pGroup) {
@@ -116,4 +86,142 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(pResult) + pSuffix + "_" + getItemName(itemlike));
         }
     }
+
+    protected void Door(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        doorBuilder(out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Trapdoor(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        trapdoorBuilder(out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Fence(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        fenceBuilder(out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Fencegate(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        fenceGateBuilder(out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Sign(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        signBuilder(out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Boat(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, out)
+                .define('#', in)
+                .pattern("# #")
+                .pattern("###")
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Chestboat(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, out, 1)
+                .requires(in)
+                .requires(Items.CHEST)
+                .unlockedBy("has_" + out.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(out).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void OneToX(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in, int x) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, out, x)
+                .requires(in)
+                .unlockedBy("has_" + out.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(out).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Pressureplate(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        pressurePlateBuilder(RecipeCategory.REDSTONE, out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Slab(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        slabBuilder(RecipeCategory.BUILDING_BLOCKS, out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Wall(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        wallBuilder(RecipeCategory.BUILDING_BLOCKS, out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Stair(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        stairBuilder(out, Ingredient.of(in))
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void LogToWood(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, out, 3)
+                .define('#', in)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+    }
+
+    protected void Surround(RecipeOutput pRecipeOutput, ItemLike out, ItemLike center, ItemLike outside, int quantity) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, out, quantity)
+                .define('#', outside)
+                .define('C', center)
+                .pattern("###")
+                .pattern("#C#")
+                .pattern("###")
+                .unlockedBy("has_" + outside.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(outside).build()))
+                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + center.asItem() + "_and_" + outside.asItem());
+    }
+
+    protected void AllWoodRecipes(RecipeOutput pRecipeOutput, ItemLike log, ItemLike strippedLog, ItemLike wood, ItemLike strippedWood, ItemLike plank, ItemLike stair, ItemLike slab, ItemLike fence, ItemLike fenceGate, ItemLike door, ItemLike trapdoor, ItemLike sign, ItemLike button, ItemLike pressurePlate, ItemLike boat, ItemLike chestBoat) {
+        LogToWood(pRecipeOutput, wood, log);
+        LogToWood(pRecipeOutput, strippedWood, strippedLog);
+        OneToX(pRecipeOutput, plank, log, 4);
+        OneToX(pRecipeOutput, plank, strippedLog, 4);
+        OneToX(pRecipeOutput, plank, wood, 4);
+        OneToX(pRecipeOutput, plank, strippedWood, 4);
+
+        Stair(pRecipeOutput, stair, plank);
+        Slab(pRecipeOutput, slab, plank);
+        Fence(pRecipeOutput, fence, plank);
+        Fencegate(pRecipeOutput, fenceGate, plank);
+        Door(pRecipeOutput, door, plank);
+        Trapdoor(pRecipeOutput, trapdoor, plank);
+        Sign(pRecipeOutput, sign, plank);
+        OneToX(pRecipeOutput, button, plank,1);
+        Pressureplate(pRecipeOutput, pressurePlate, plank);
+        Boat(pRecipeOutput, boat, plank);
+        Chestboat(pRecipeOutput, chestBoat, boat);
+    }
+
+    protected void AllDefaultOreRecipes(RecipeOutput pRecipeOutput, ItemLike stoneOre, ItemLike deepslateOre, ItemLike rawMaterial, ItemLike smeltingResult, float smeltingExp, ItemLike rawBlock, ItemLike block) {
+        oreSmelting(pRecipeOutput, List.of(stoneOre, deepslateOre, rawMaterial), RecipeCategory.MISC, smeltingResult, smeltingExp, 200, ForgeRegistries.ITEMS.getKey(smeltingResult.asItem()).getPath());
+        oreBlasting(pRecipeOutput, List.of(stoneOre, deepslateOre, rawMaterial), RecipeCategory.MISC, smeltingResult, smeltingExp, 100, ForgeRegistries.ITEMS.getKey(smeltingResult.asItem()).getPath());
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, rawMaterial, RecipeCategory.BUILDING_BLOCKS, rawBlock);
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, smeltingResult, RecipeCategory.BUILDING_BLOCKS, block);
+    }
+
+    protected void AllDefaultOreRecipes(RecipeOutput pRecipeOutput, ItemLike stoneOre, ItemLike deepslateOre, ItemLike smeltingResult, float smeltingExp, ItemLike block) {
+        oreSmelting(pRecipeOutput, List.of(stoneOre, deepslateOre), RecipeCategory.MISC, smeltingResult, smeltingExp, 200, ForgeRegistries.ITEMS.getKey(smeltingResult.asItem()).getPath());
+        oreBlasting(pRecipeOutput, List.of(stoneOre, deepslateOre), RecipeCategory.MISC, smeltingResult, smeltingExp, 100, ForgeRegistries.ITEMS.getKey(smeltingResult.asItem()).getPath());
+        nineBlockStorageRecipes(pRecipeOutput, RecipeCategory.MISC, smeltingResult, RecipeCategory.BUILDING_BLOCKS, block);
+    }
+
+    private static Criterion<InventoryChangeTrigger.TriggerInstance> inventoryTrigger(ItemPredicate... pPredicates) {
+        return CriteriaTriggers.INVENTORY_CHANGED
+                .createCriterion(new InventoryChangeTrigger.TriggerInstance(Optional.empty(), InventoryChangeTrigger.TriggerInstance.Slots.ANY, List.of(pPredicates)));
+    }
+
 }

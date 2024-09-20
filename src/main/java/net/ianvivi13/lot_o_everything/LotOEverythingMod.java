@@ -2,8 +2,13 @@ package net.ianvivi13.lot_o_everything;
 
 import com.mojang.logging.LogUtils;
 import net.ianvivi13.lot_o_everything.block.ModBlocks;
+import net.ianvivi13.lot_o_everything.entity.ModEntities;
+import net.ianvivi13.lot_o_everything.entity.client.ModBoatRenderer;
 import net.ianvivi13.lot_o_everything.item.ModCreativeModeTabs;
 import net.ianvivi13.lot_o_everything.item.ModItems;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +35,7 @@ public class LotOEverythingMod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModEntities.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -39,7 +45,12 @@ public class LotOEverythingMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_LOG.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.STRIPPED_ICE_LOG.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_WOOD.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.STRIPPED_ICE_WOOD.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_PLANKS.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_LEAVES.get(), RenderType.translucent());
     }
 
     // Add the example block item to the building blocks tab
@@ -60,7 +71,8 @@ public class LotOEverythingMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            EntityRenderers.register(ModEntities.MOD_BOAT.get(), pContext -> new ModBoatRenderer(pContext, false));
+            EntityRenderers.register(ModEntities.MOD_CHEST_BOAT.get(), pContext -> new ModBoatRenderer(pContext, true));
         }
     }
 }

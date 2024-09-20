@@ -3,12 +3,8 @@ package net.ianvivi13.lot_o_everything.datagen;
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
 import net.ianvivi13.lot_o_everything.item.ModItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -31,5 +27,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.MAGNESIUM_INGOT.get());
         basicItem(ModItems.RUBY.get());
         basicItem(ModItems.SAPPHIRE.get());
+
+        basicItem(ModItems.ICE_BOAT);
+        basicItem(ModItems.ICE_CHEST_BOAT);
     }
 }

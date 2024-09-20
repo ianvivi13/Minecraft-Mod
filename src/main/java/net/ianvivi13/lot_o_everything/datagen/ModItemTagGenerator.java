@@ -1,9 +1,11 @@
 package net.ianvivi13.lot_o_everything.datagen;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
+import net.ianvivi13.lot_o_everything.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -17,6 +19,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        this.tag(ItemTags.LOGS_THAT_BURN);
 
+        this.tag(ItemTags.PLANKS)
+                .add(ModBlocks.ICE_PLANKS.get().asItem());
     }
 }
