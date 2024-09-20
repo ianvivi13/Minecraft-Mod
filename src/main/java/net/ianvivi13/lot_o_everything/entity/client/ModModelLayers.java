@@ -6,8 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ModModelLayers {
     public static final ModelLayerLocation ICE_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(LotOEverythingMod.MOD_ID, "boat/ice"), "main");
+            ResourceLocation.fromNamespaceAndPath(LotOEverythingMod.MOD_ID, "boat/ice"), "main");
     public static final ModelLayerLocation ICE_CHEST_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(LotOEverythingMod.MOD_ID, "chest_boat/ice"), "main");
+            ResourceLocation.fromNamespaceAndPath(LotOEverythingMod.MOD_ID, "chest_boat/ice"), "main");
 
 }

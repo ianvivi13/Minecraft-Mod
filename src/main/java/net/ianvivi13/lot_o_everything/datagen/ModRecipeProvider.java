@@ -37,7 +37,7 @@ public class ModRecipeProvider extends RecipeProvider {
         AllDefaultOreRecipes(pRecipeOutput, ModBlocks.SAPPHIRE_ORE.get(), ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get(), ModItems.SAPPHIRE.get(), 1.0F, ModBlocks.SAPPHIRE_BLOCK.get());
         // endregion
         // region Wood Stuff
-        Door(pRecipeOutput, ModBlocks.TITANIUM_BLOCK.get(), ModBlocks.ICE_PLANKS.get());
+        //Door(pRecipeOutput, ModBlocks.TITANIUM_BLOCK.get(), ModBlocks.ICE_PLANKS.get());
         // endregion
         // region Quality of Life
         oreSmelting(pRecipeOutput, List.of(Items.RAW_COPPER_BLOCK), RecipeCategory.MISC, Items.COPPER_BLOCK, 0.7F * 9, 200, "copper_block");

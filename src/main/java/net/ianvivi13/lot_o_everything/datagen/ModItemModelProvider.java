@@ -28,7 +28,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.RUBY.get());
         basicItem(ModItems.SAPPHIRE.get());
 
-        basicItem(ModItems.ICE_BOAT);
-        basicItem(ModItems.ICE_CHEST_BOAT);
+        basicItem(ModItems.ICE_BOAT.get());
+        basicItem(ModItems.ICE_CHEST_BOAT.get());
     }
 }
