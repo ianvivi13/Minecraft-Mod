@@ -17,25 +17,19 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(ModItems.RAW_SILVER);
-        simpleItem(ModItems.SILVER_INGOT);
-        simpleItem(ModItems.RAW_LEAD);
-        simpleItem(ModItems.LEAD_INGOT);
-        simpleItem(ModItems.RAW_TITANIUM);
-        simpleItem(ModItems.TITANIUM_INGOT);
-        simpleItem(ModItems.RAW_TIN);
-        simpleItem(ModItems.TIN_INGOT);
-        simpleItem(ModItems.RAW_ZINC);
-        simpleItem(ModItems.ZINC_INGOT);
-        simpleItem(ModItems.RAW_MAGNESIUM);
-        simpleItem(ModItems.MAGNESIUM_INGOT);
-        simpleItem(ModItems.RUBY);
-        simpleItem(ModItems.SAPPHIRE);
-    }
-
-    private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
-        return withExistingParent(item.getId().getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(LotOEverythingMod.MOD_ID, "item/" + item.getId().getPath()));
+        basicItem(ModItems.RAW_SILVER.get());
+        basicItem(ModItems.SILVER_INGOT.get());
+        basicItem(ModItems.RAW_LEAD.get());
+        basicItem(ModItems.LEAD_INGOT.get());
+        basicItem(ModItems.RAW_TITANIUM.get());
+        basicItem(ModItems.TITANIUM_INGOT.get());
+        basicItem(ModItems.RAW_TIN.get());
+        basicItem(ModItems.TIN_INGOT.get());
+        basicItem(ModItems.RAW_ZINC.get());
+        basicItem(ModItems.ZINC_INGOT.get());
+        basicItem(ModItems.RAW_MAGNESIUM.get());
+        basicItem(ModItems.MAGNESIUM_INGOT.get());
+        basicItem(ModItems.RUBY.get());
+        basicItem(ModItems.SAPPHIRE.get());
     }
 }
