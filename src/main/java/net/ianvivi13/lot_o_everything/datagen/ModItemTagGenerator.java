@@ -23,5 +23,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
         this.tag(ItemTags.PLANKS)
                 .add(ModBlocks.ICE_PLANKS.get().asItem());
+
+        this.tag(ItemTags.LOGS_THAT_BURN);
     }
 }

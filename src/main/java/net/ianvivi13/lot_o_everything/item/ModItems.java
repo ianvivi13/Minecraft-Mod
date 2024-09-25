@@ -1,9 +1,12 @@
 package net.ianvivi13.lot_o_everything.item;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
+import net.ianvivi13.lot_o_everything.block.ModBlocks;
 import net.ianvivi13.lot_o_everything.entity.custom.ModBoatEntity;
 import net.ianvivi13.lot_o_everything.item.custom.ModBoatItem;
+import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SignItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -49,6 +52,11 @@ public class ModItems {
             () -> new ModBoatItem(false, ModBoatEntity.Type.ICE, new Item.Properties()));
     public static final RegistryObject<Item> ICE_CHEST_BOAT = ITEMS.register("ice_chest_boat",
             () -> new ModBoatItem(true, ModBoatEntity.Type.ICE, new Item.Properties()));
+
+    public static final RegistryObject<Item> ICE_SIGN = ITEMS.register("ice_sign",
+            () -> new SignItem(new Item.Properties().stacksTo(16), ModBlocks.ICE_SIGN.get(), ModBlocks.ICE_WALL_SIGN.get()));
+    public static final RegistryObject<Item> ICE_HANGING_SIGN = ITEMS.register("ice_hanging_sign",
+            () -> new HangingSignItem(ModBlocks.ICE_HANGING_SIGN.get(), ModBlocks.ICE_WALL_HANGING_SIGN.get(), new Item.Properties().stacksTo(16)));
     // endregion
 
     public static void register(IEventBus eventBus) {

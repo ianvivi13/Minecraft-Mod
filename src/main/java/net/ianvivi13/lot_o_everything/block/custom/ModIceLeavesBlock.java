@@ -23,6 +23,10 @@ public class ModIceLeavesBlock extends LeavesBlock {
         if (pLevel.getBrightness(LightLayer.BLOCK, pPos) > 11 - pState.getLightBlock(pLevel, pPos)) {
             this.melt(pState, pLevel, pPos);
         }
+        if (this.decaying(pState)) {
+            dropResources(pState, pLevel, pPos);
+            pLevel.removeBlock(pPos, false);
+        }
     }
 
     protected void melt(BlockState pState, Level pLevel, BlockPos pPos) {

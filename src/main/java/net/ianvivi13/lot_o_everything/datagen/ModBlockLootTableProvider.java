@@ -5,10 +5,13 @@ import net.ianvivi13.lot_o_everything.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
+import java.util.function.Function;
 
 public class ModBlockLootTableProvider extends BlockLootSubProvider {
     public ModBlockLootTableProvider(HolderLookup.Provider pRegistries) {
@@ -73,12 +76,23 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropWhenSilkTouch(ModBlocks.STRIPPED_ICE_WOOD.get());
         this.dropWhenSilkTouch(ModBlocks.ICE_PLANKS.get());
         this.add(ModBlocks.ICE_LEAVES.get(), block ->
-                createLeavesDrops(ModBlocks.ICE_LEAVES.get(), ModBlocks.TITANIUM_BLOCK.get(), NORMAL_LEAVES_SAPLING_CHANCES)); // Change to sapling
+                createLeavesDrops(ModBlocks.ICE_LEAVES.get(), ModBlocks.ICE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        this.dropSelf(ModBlocks.ICE_SAPLING.get());
+
+        this.iceSignDrop(ModBlocks.ICE_SIGN.get(), block -> createSilkTouchOnlyTable(ModItems.ICE_SIGN.get()));
+        this.iceSignDrop(ModBlocks.ICE_WALL_SIGN.get(), block -> createSilkTouchOnlyTable(ModItems.ICE_SIGN.get()));
+        this.iceSignDrop(ModBlocks.ICE_HANGING_SIGN.get(), block -> createSilkTouchOnlyTable(ModItems.ICE_HANGING_SIGN.get()));
+        this.iceSignDrop(ModBlocks.ICE_WALL_HANGING_SIGN.get(), block -> createSilkTouchOnlyTable(ModItems.ICE_HANGING_SIGN.get()));
         // endregion
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+    }
+
+    protected void iceSignDrop(Block signBlock, Function<Block, LootTable.Builder> signItem) {
+        this.add(signBlock, signItem);
     }
 }

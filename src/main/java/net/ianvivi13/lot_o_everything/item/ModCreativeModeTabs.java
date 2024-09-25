@@ -79,6 +79,9 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.ICE_LEAVES.get());
                         pOutput.accept(ModItems.ICE_BOAT.get());
                         pOutput.accept(ModItems.ICE_CHEST_BOAT.get());
+                        pOutput.accept(ModBlocks.ICE_SAPLING.get());
+                        pOutput.accept(ModBlocks.ICE_SIGN.get());
+                        pOutput.accept(ModBlocks.ICE_HANGING_SIGN.get());
                     })
                     .build());
 

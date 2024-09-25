@@ -46,12 +46,16 @@
   "block.lot_o_everything.sapphire_block": "Block of Sapphire",
   "block.lot_o_everything.sapphire_ore": "Sapphire Ore",
   "block.lot_o_everything.deepslate_sapphire_ore": "Deepslate Sapphire Ore",
+
   "block.lot_o_everything.ice_log": "Ice Log",
   "block.lot_o_everything.stripped_ice_log": "Stripped Ice Log",
   "block.lot_o_everything.ice_wood": "Ice Wood",
   "block.lot_o_everything.stripped_ice_wood": "Stripped Ice Wood",
   "block.lot_o_everything.ice_planks": "Ice Planks",
   "block.lot_o_everything.ice_leaves": "Ice Leaves",
+  "block.lot_o_everything.ice_sapling": "Ice Sapling",
+  "block.lot_o_everything.ice_sign": "Ice Sign",
+  "block.lot_o_everything.ice_hanging_sign": "Ice Hanging Sign",
 
   "entity.lot_o_everything.mod_chest_boat": "Boat with Chest",
 

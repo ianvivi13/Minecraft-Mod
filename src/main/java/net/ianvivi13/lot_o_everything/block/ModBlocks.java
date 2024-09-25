@@ -1,9 +1,10 @@
 package net.ianvivi13.lot_o_everything.block;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
-import net.ianvivi13.lot_o_everything.block.custom.ModIceLeavesBlock;
-import net.ianvivi13.lot_o_everything.block.custom.ModIceRotatedPillarBlock;
+import net.ianvivi13.lot_o_everything.block.custom.*;
 import net.ianvivi13.lot_o_everything.item.ModItems;
+import net.ianvivi13.lot_o_everything.util.ModWoodTypes;
+import net.ianvivi13.lot_o_everything.worldgen.tree.IceTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EntityType;
@@ -13,11 +14,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.IceBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
@@ -27,6 +26,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -207,13 +207,25 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> ICE_LEAVES = registerBlock("ice_leaves",
             () -> new ModIceLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
-                    .mapColor(MapColor.ICE)
+                    .mapColor(MapColor.SNOW)
                     .friction(0.98F)
                     .randomTicks()
                     .strength(0.5F)
-                    .sound(SoundType.GLASS)
                     .noOcclusion()
                     .isRedstoneConductor(ModBlocks::never)));
+
+    public static final RegistryObject<Block> ICE_SAPLING = registerBlock("ice_sapling",
+            () -> new SaplingBlock(new IceTreeGrower("ICE", Optional.empty(), Optional.empty(), Optional.empty()), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Block> ICE_SIGN = BLOCKS.register("ice_sign",
+            () -> new ModStandingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SIGN).sound(SoundType.GLASS)));
+    public static final RegistryObject<Block> ICE_WALL_SIGN = BLOCKS.register("ice_wall_sign",
+            () -> new ModWallSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_WALL_SIGN).sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> ICE_HANGING_SIGN = BLOCKS.register("ice_hanging_sign",
+            () -> new ModHangingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_HANGING_SIGN).sound(SoundType.GLASS)));
+    public static final RegistryObject<Block> ICE_WALL_HANGING_SIGN = BLOCKS.register("ice_wall_hanging_sign",
+            () -> new ModWallHangingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_WALL_HANGING_SIGN).sound(SoundType.GLASS)));
 
     // endregion
 

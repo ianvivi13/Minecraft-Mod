@@ -6,6 +6,8 @@ import net.ianvivi13.lot_o_everything.block.custom.ModIceRotatedPillarBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -69,7 +71,31 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.STRIPPED_ICE_WOOD);
         blockWithItem(ModBlocks.ICE_PLANKS);
         leavesBlock(ModBlocks.ICE_LEAVES);
+
+        saplingBlock(ModBlocks.ICE_SAPLING);
+
+        signBlock((StandingSignBlock) ModBlocks.ICE_SIGN.get(), (WallSignBlock) ModBlocks.ICE_WALL_SIGN.get(),
+                blockTexture(ModBlocks.ICE_PLANKS.get()));
+        hangingSignBlock(ModBlocks.ICE_HANGING_SIGN.get(), ModBlocks.ICE_WALL_HANGING_SIGN.get(), blockTexture(ModBlocks.ICE_PLANKS.get()));
         // endregion
+    }
+
+    private void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
+        ModelFile sign = models().sign(name(signBlock), texture);
+        hangingSignBlock(signBlock, wallSignBlock, sign);
+    }
+
+    private void hangingSignBlock(Block signBlock, Block wallSignBlock, ModelFile sign) {
+        simpleBlock(signBlock, sign);
+        simpleBlock(wallSignBlock, sign);
+    }
+
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ResourceLocation key(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
@@ -84,5 +110,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void leavesBlock(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), models().singleTexture(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(),
                 ResourceLocation.withDefaultNamespace("block/leaves"), "all", blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    }
+
+    private void saplingBlock(RegistryObject<Block> blockRegistryObject) {
+        simpleBlock(blockRegistryObject.get(), models().cross(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(),
+                blockTexture(blockRegistryObject.get())).renderType("cutout"));
     }
 }
