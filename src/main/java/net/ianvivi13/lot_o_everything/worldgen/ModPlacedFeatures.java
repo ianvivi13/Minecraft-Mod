@@ -1,10 +1,13 @@
 package net.ianvivi13.lot_o_everything.worldgen;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
+import net.ianvivi13.lot_o_everything.block.ModBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -19,6 +22,7 @@ import java.util.List;
 
 public class ModPlacedFeatures {
 
+    //region Ores
     public static final ResourceKey<PlacedFeature> OVERWORLD_SILVER_ORE_PLACED_KEY = registerKey("overworld_silver_ore_placed");
     public static final ResourceKey<PlacedFeature> OVERWORLD_SILVER_ORE_BURIED_PLACED_KEY = registerKey("overworld_silver_ore_buried_placed");
     public static final ResourceKey<PlacedFeature> OVERWORLD_LEAD_ORE_PLACED_KEY = registerKey("overworld_lead_ore_placed");
@@ -34,10 +38,16 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> OVERWORLD_TIN_ORE_BURIED_PLACED_KEY = registerKey("overworld_tin_ore_buried_placed");
     public static final ResourceKey<PlacedFeature> OVERWORLD_RUBY_ORE_PLACED_KEY = registerKey("overworld_ruby_ore_placed");
     public static final ResourceKey<PlacedFeature> OVERWORLD_SAPPHIRE_ORE_PLACED_KEY = registerKey("overworld_sapphire_ore_placed");
+    //endregion
+    //region Trees
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_RARE_KEY = registerKey("ice_placed_rare");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_KEY = registerKey("ice_placed");
+    //endregion
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
+        //region Ores
         register(context, OVERWORLD_SILVER_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_SILVER_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32))));
 
@@ -82,6 +92,16 @@ public class ModPlacedFeatures {
 
         register(context, OVERWORLD_SAPPHIRE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_SAPPHIRE_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(100, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(480))));
+        //endregion
+        //region Trees
+        register(context, ICE_PLACED_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBlocks.ICE_SAPLING.get()));
+
+        register(context, ICE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1),
+                        ModBlocks.ICE_SAPLING.get()));
+        //endregion
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
