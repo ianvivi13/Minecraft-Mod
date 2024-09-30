@@ -103,7 +103,7 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1),
                         ModBlocks.ICE_SAPLING.get()));
 
-        register(context, ICE_PLACED_TAIGA_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
+        register(context, ICE_PLACED_GROVE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
         //endregion
     }

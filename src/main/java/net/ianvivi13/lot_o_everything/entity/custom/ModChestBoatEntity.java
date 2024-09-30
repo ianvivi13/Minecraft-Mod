@@ -8,11 +8,9 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class ModChestBoatEntity extends ChestBoat {
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE = SynchedEntityData.defineId(ModChestBoatEntity.class, EntityDataSerializers.INT);
@@ -42,11 +40,9 @@ public class ModChestBoatEntity extends ChestBoat {
     @Override
     public float getGroundFriction() {
         if(getModVariant() == ModBoatEntity.Type.ICE) {
-            float friction = super.getGroundFriction();
-            if(friction == 0.0f) return friction;
-            if(friction > 0.0f && getBlockSpeedFactor() != 1) {
+            if(getBlockSpeedFactor() != 1) {
                 return 0.81f;
-            } else if(friction > 0.0f && getBlockSpeedFactor() == 1) {
+            } else if(getBlockSpeedFactor() == 1) {
                 return 0.98f;
             }
         }

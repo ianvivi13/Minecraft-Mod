@@ -36,6 +36,7 @@ public class ModBiomeModifiers {
     //region Trees
     public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_ICE_TREE_RARE = registerKey("add_overworld_ice_tree_rare");
     public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_ICE_TREE = registerKey("add_overworld_ice_tree");
+    public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_ICE_TREE_GROVE = registerKey("add_overworld_ice_tree_grove");
     //endregion
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
@@ -129,7 +130,7 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_TAIGA_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));
 
-        context.register(ADD_OVERWORLD_ICE_TREE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_OVERWORLD_ICE_TREE_GROVE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(ModTags.Biomes.IS_GROVE),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_GROVE_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));

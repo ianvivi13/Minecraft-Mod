@@ -3,22 +3,17 @@ package net.ianvivi13.lot_o_everything.entity.custom;
 import net.ianvivi13.lot_o_everything.block.ModBlocks;
 import net.ianvivi13.lot_o_everything.entity.ModEntities;
 import net.ianvivi13.lot_o_everything.item.ModItems;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.IntFunction;
 
@@ -47,20 +42,13 @@ public class ModBoatEntity extends Boat {
     @Override
     public float getGroundFriction() {
         if(getModVariant() == Type.ICE) {
-            float friction = super.getGroundFriction();
-            if(friction == 0.0f) return friction;
-            if(friction > 0.0f && getBlockSpeedFactor() != 1) {
+            if(getBlockSpeedFactor() != 1) {
                 return 0.81f;
-            } else if(friction > 0.0f && getBlockSpeedFactor() == 1) {
+            } else if(getBlockSpeedFactor() == 1) {
                 return 0.98f;
             }
         }
         return super.getGroundFriction();
-    }
-
-    @Override
-    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
-        super.checkFallDamage(pY, pOnGround, pState, pPos);
     }
 
     public void setVariant(Type pVariant) {
