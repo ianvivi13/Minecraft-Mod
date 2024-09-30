@@ -18,6 +18,6 @@ public class IceTreeGrower extends TreeGrower {
     @Nullable
     @Override
     public ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource pRandom, boolean pHasFlowers) {
-        return ModConfiguredFeatures.ICE_KEY;
+        return ModConfiguredFeatures.ICE_SPRUCE;
     }
 }

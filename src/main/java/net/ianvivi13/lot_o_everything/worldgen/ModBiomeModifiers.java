@@ -34,9 +34,12 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_SAPPHIRE_ORE = registerKey("add_overworld_sapphire_ore");
     //endregion
     //region Trees
-    public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_ICE_TREE_RARE = registerKey("add_overworld_ice_tree_rare");
-    public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_ICE_TREE = registerKey("add_overworld_ice_tree");
-    public static final ResourceKey<BiomeModifier> ADD_OVERWORLD_ICE_TREE_GROVE = registerKey("add_overworld_ice_tree_grove");
+    public static final ResourceKey<BiomeModifier> ADD_SPRUCE_ICE_TREE_RARE = registerKey("add_spruce_ice_tree_rare");
+    public static final ResourceKey<BiomeModifier> ADD_PINE_ICE_TREE_RARE = registerKey("add_pine_ice_tree_rare");
+    public static final ResourceKey<BiomeModifier> ADD_SPRUCE_ICE_TREE_TAIGA = registerKey("add_spruce_ice_tree_taiga");
+    public static final ResourceKey<BiomeModifier> ADD_PINE_ICE_TREE_TAIGA = registerKey("add_pine_ice_tree_taiga");
+    public static final ResourceKey<BiomeModifier> ADD_SPRUCE_ICE_TREE_GROVE = registerKey("add_spruce_ice_tree_grove");
+    public static final ResourceKey<BiomeModifier> ADD_PINE_ICE_TREE_GROVE = registerKey("add_pine_ice_tree_grove");
     //endregion
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
@@ -120,19 +123,34 @@ public class ModBiomeModifiers {
                 GenerationStep.Decoration.UNDERGROUND_ORES));
         //endregion
         //region Trees
-        context.register(ADD_OVERWORLD_ICE_TREE_RARE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_SPRUCE_ICE_TREE_RARE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(Tags.Biomes.IS_SNOWY),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_RARE_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_RARE_SPRUCE)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));
 
-        context.register(ADD_OVERWORLD_ICE_TREE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_PINE_ICE_TREE_RARE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(Tags.Biomes.IS_SNOWY),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_RARE_PINE)),
+                GenerationStep.Decoration.VEGETAL_DECORATION));
+
+        context.register(ADD_SPRUCE_ICE_TREE_TAIGA, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(ModTags.Biomes.IS_SNOWY_TAIGA),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_TAIGA_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_TAIGA_SPRUCE)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));
 
-        context.register(ADD_OVERWORLD_ICE_TREE_GROVE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_PINE_ICE_TREE_TAIGA, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(ModTags.Biomes.IS_SNOWY_TAIGA),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_TAIGA_PINE)),
+                GenerationStep.Decoration.VEGETAL_DECORATION));
+
+        context.register(ADD_SPRUCE_ICE_TREE_GROVE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(ModTags.Biomes.IS_GROVE),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_GROVE_KEY)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_GROVE_SPRUCE)),
+                GenerationStep.Decoration.VEGETAL_DECORATION));
+
+        context.register(ADD_PINE_ICE_TREE_GROVE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(ModTags.Biomes.IS_GROVE),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_GROVE_PINE)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));
         //endregion
     }

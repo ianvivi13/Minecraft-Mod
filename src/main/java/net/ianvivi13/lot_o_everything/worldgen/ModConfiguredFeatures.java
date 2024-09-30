@@ -16,7 +16,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.PineFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
@@ -45,7 +45,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_RUBY_ORE_KEY = registerKey("overworld_ruby_ore");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_SAPPHIRE_ORE_KEY = registerKey("overworld_sapphire_ore");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_KEY = registerKey("ice");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_SPRUCE = registerKey("ice_spruce");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_PINE = registerKey("ice_pine");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -101,12 +102,19 @@ public class ModConfiguredFeatures {
         register(context, OVERWORLD_RUBY_ORE_KEY, Feature.ORE, new OreConfiguration(overworldRubyOres, 3));
         register(context, OVERWORLD_SAPPHIRE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldSapphireOres, 3));
 
-        register(context, ICE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+        register(context, ICE_SPRUCE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                         BlockStateProvider.simple(ModBlocks.ICE_LOG.get()),
                         new StraightTrunkPlacer(5, 2, 1),
                         BlockStateProvider.simple(ModBlocks.ICE_LEAVES.get()),
                         new SpruceFoliagePlacer(UniformInt.of(2, 3), UniformInt.of(0, 2), UniformInt.of(1, 2)),
                         new TwoLayersFeatureSize(2, 0, 2)).ignoreVines().build());
+
+        register(context, ICE_PINE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.ICE_LOG.get()),
+                new StraightTrunkPlacer(6, 4, 0),
+                BlockStateProvider.simple(ModBlocks.ICE_LEAVES.get()),
+                new PineFoliagePlacer(ConstantInt.of(1), ConstantInt.of(1), UniformInt.of(3, 4)),
+                new TwoLayersFeatureSize(2, 0, 2)).ignoreVines().build());
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

@@ -2,6 +2,7 @@ package net.ianvivi13.lot_o_everything.worldgen;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
 import net.ianvivi13.lot_o_everything.block.ModBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -11,12 +12,11 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
 
@@ -40,9 +40,12 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> OVERWORLD_SAPPHIRE_ORE_PLACED_KEY = registerKey("overworld_sapphire_ore_placed");
     //endregion
     //region Trees
-    public static final ResourceKey<PlacedFeature> ICE_PLACED_RARE_KEY = registerKey("ice_placed_rare");
-    public static final ResourceKey<PlacedFeature> ICE_PLACED_TAIGA_KEY = registerKey("ice_placed_taiga");
-    public static final ResourceKey<PlacedFeature> ICE_PLACED_GROVE_KEY = registerKey("ice_placed_grove");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_RARE_SPRUCE = registerKey("ice_placed_rare_spruce");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_RARE_PINE = registerKey("ice_placed_rare_pine");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_TAIGA_SPRUCE = registerKey("ice_placed_taiga_spruce");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_TAIGA_PINE = registerKey("ice_placed_taiga_pine");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_GROVE_SPRUCE = registerKey("ice_placed_grove_spruce");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_GROVE_PINE = registerKey("ice_placed_grove_pine");
     //endregion
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -95,17 +98,34 @@ public class ModPlacedFeatures {
                 ModOrePlacement.commonOrePlacement(100, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(480))));
         //endregion
         //region Trees
-        register(context, ICE_PLACED_RARE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
+        register(context, ICE_PLACED_RARE_SPRUCE, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_SPRUCE),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1),
+                        ModBlocks.ICE_SAPLING.get()));
+
+        register(context, ICE_PLACED_RARE_PINE, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_PINE),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
                         ModBlocks.ICE_SAPLING.get()));
 
-        register(context, ICE_PLACED_TAIGA_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
+        register(context, ICE_PLACED_TAIGA_SPRUCE, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_SPRUCE),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1),
                         ModBlocks.ICE_SAPLING.get()));
 
-        register(context, ICE_PLACED_GROVE_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
+        register(context, ICE_PLACED_TAIGA_PINE, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_PINE),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.2f, 1),
+                        ModBlocks.ICE_SAPLING.get()));
+
+        BlockPredicate iceTreeGroveSpawnBlocks = BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.SNOW_BLOCK, Blocks.POWDER_SNOW);
+
+        register(context, ICE_PLACED_GROVE_SPRUCE, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_SPRUCE),
+                treePlacement(PlacementUtils.countExtra(1, 0.1f, 1), BlockPredicateFilter.forPredicate(iceTreeGroveSpawnBlocks)));
+
+        register(context, ICE_PLACED_GROVE_PINE, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_PINE),
+                treePlacement(PlacementUtils.countExtra(0, 0.1f, 1), BlockPredicateFilter.forPredicate(iceTreeGroveSpawnBlocks)));
         //endregion
+    }
+
+    public static List<PlacementModifier> treePlacement(PlacementModifier pPlacement, BlockPredicateFilter filter) {
+        return VegetationPlacements.treePlacementBase(pPlacement).add(filter).build();
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
