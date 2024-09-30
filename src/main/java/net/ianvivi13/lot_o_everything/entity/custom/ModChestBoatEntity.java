@@ -3,14 +3,19 @@ package net.ianvivi13.lot_o_everything.entity.custom;
 import net.ianvivi13.lot_o_everything.block.ModBlocks;
 import net.ianvivi13.lot_o_everything.entity.ModEntities;
 import net.ianvivi13.lot_o_everything.item.ModItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class ModChestBoatEntity extends ChestBoat {
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE = SynchedEntityData.defineId(ModChestBoatEntity.class, EntityDataSerializers.INT);
@@ -39,14 +44,16 @@ public class ModChestBoatEntity extends ChestBoat {
 
     @Override
     public float getGroundFriction() {
+        float superFriction = super.getGroundFriction();
         if(getModVariant() == ModBoatEntity.Type.ICE) {
-            if(getBlockSpeedFactor() != 1) {
-                return 0.81f;
-            } else if(getBlockSpeedFactor() == 1) {
+            if(getBlockSpeedFactor() == 1 && this.status == Status.ON_LAND) {
+                if(Float.isNaN(superFriction)) {
+                    return superFriction;
+                }
                 return 0.98f;
             }
         }
-        return super.getGroundFriction();
+        return superFriction;
     }
 
     public void setVariant(ModBoatEntity.Type pVariant) {
@@ -70,5 +77,39 @@ public class ModChestBoatEntity extends ChestBoat {
 
     public ModBoatEntity.Type getModVariant() {
         return ModBoatEntity.Type.byId(this.entityData.get(DATA_ID_TYPE));
+    }
+
+    @Override
+    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
+        this.lastYd = this.getDeltaMovement().y;
+        if (!this.isPassenger()) {
+            if (pOnGround) {
+                if (this.fallDistance > 3.0F) {
+                    if (this.status != Boat.Status.ON_LAND) {
+                        this.resetFallDistance();
+                        return;
+                    }
+
+                    this.causeFallDamage(this.fallDistance, 1.0F, this.damageSources().fall());
+                    if (!this.level().isClientSide && !this.isRemoved()) {
+                        this.kill();
+                        if (this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                            int j;
+                            for(j = 0; j < 3; ++j) {
+                                this.spawnAtLocation(this.getModVariant().getPlanks());
+                            }
+
+                            for(j = 0; j < 2; ++j) {
+                                this.spawnAtLocation(Items.STICK);
+                            }
+                        }
+                    }
+                }
+
+                this.resetFallDistance();
+            } else if (!this.canBoatInFluid(this.level().getFluidState(this.blockPosition().below())) && pY < 0.0) {
+                this.fallDistance -= (float)pY;
+            }
+        }
     }
 }
