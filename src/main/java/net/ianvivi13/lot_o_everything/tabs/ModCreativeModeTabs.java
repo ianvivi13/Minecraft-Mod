@@ -1,12 +1,12 @@
-package net.ianvivi13.lot_o_everything.item;
+package net.ianvivi13.lot_o_everything.tabs;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
 import net.ianvivi13.lot_o_everything.block.ModBlocks;
+import net.ianvivi13.lot_o_everything.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -76,12 +76,20 @@ public class ModCreativeModeTabs {
                         pOutput.accept(ModBlocks.ICE_WOOD.get());
                         pOutput.accept(ModBlocks.STRIPPED_ICE_WOOD.get());
                         pOutput.accept(ModBlocks.ICE_PLANKS.get());
+                        pOutput.accept(ModBlocks.ICE_SLAB.get());
+                        pOutput.accept(ModBlocks.ICE_STAIRS.get());
                         pOutput.accept(ModBlocks.ICE_LEAVES.get());
+                        pOutput.accept(ModBlocks.ICE_TRAPDOOR.get());
+                        pOutput.accept(ModBlocks.ICE_DOOR.get());
+                        pOutput.accept(ModBlocks.ICE_FENCE.get());
+                        pOutput.accept(ModBlocks.ICE_FENCE_GATE.get());
+                        pOutput.accept(ModBlocks.ICE_BUTTON.get());
+                        pOutput.accept(ModBlocks.ICE_PRESSURE_PLATE.get());
+                        pOutput.accept(ModBlocks.ICE_SIGN.get());
+                        pOutput.accept(ModBlocks.ICE_HANGING_SIGN.get());
                         pOutput.accept(ModItems.ICE_BOAT.get());
                         pOutput.accept(ModItems.ICE_CHEST_BOAT.get());
                         pOutput.accept(ModBlocks.ICE_SAPLING.get());
-                        pOutput.accept(ModBlocks.ICE_SIGN.get());
-                        pOutput.accept(ModBlocks.ICE_HANGING_SIGN.get());
                     })
                     .build());
 

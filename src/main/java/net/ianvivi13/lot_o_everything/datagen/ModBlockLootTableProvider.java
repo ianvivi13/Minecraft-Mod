@@ -2,12 +2,23 @@ package net.ianvivi13.lot_o_everything.datagen;
 
 import net.ianvivi13.lot_o_everything.block.ModBlocks;
 import net.ianvivi13.lot_o_everything.item.ModItems;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
@@ -75,15 +86,25 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         this.dropWhenSilkTouch(ModBlocks.ICE_WOOD.get());
         this.dropWhenSilkTouch(ModBlocks.STRIPPED_ICE_WOOD.get());
         this.dropWhenSilkTouch(ModBlocks.ICE_PLANKS.get());
+        this.add(ModBlocks.ICE_SLAB.get(), block -> createIceSlabItemTable(ModBlocks.ICE_SLAB.get()));
+        this.dropWhenSilkTouch(ModBlocks.ICE_STAIRS.get());
         this.add(ModBlocks.ICE_LEAVES.get(), block ->
                 createLeavesDrops(ModBlocks.ICE_LEAVES.get(), ModBlocks.ICE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
-        this.dropSelf(ModBlocks.ICE_SAPLING.get());
+        this.dropWhenSilkTouch(ModBlocks.ICE_TRAPDOOR.get());
+        this.add(ModBlocks.ICE_DOOR.get(), block -> createIceDoorItemTable(ModBlocks.ICE_DOOR.get()));
+        this.dropWhenSilkTouch(ModBlocks.ICE_FENCE.get());
+        this.dropWhenSilkTouch(ModBlocks.ICE_FENCE_GATE.get());
+        this.dropWhenSilkTouch(ModBlocks.ICE_BUTTON.get());
+        this.dropWhenSilkTouch(ModBlocks.ICE_PRESSURE_PLATE.get());
 
         this.iceSignDrop(ModBlocks.ICE_SIGN.get(), block -> createSilkTouchOnlyTable(ModItems.ICE_SIGN.get()));
         this.iceSignDrop(ModBlocks.ICE_WALL_SIGN.get(), block -> createSilkTouchOnlyTable(ModItems.ICE_SIGN.get()));
         this.iceSignDrop(ModBlocks.ICE_HANGING_SIGN.get(), block -> createSilkTouchOnlyTable(ModItems.ICE_HANGING_SIGN.get()));
         this.iceSignDrop(ModBlocks.ICE_WALL_HANGING_SIGN.get(), block -> createSilkTouchOnlyTable(ModItems.ICE_HANGING_SIGN.get()));
+
+        this.dropSelf(ModBlocks.ICE_SAPLING.get());
+        this.dropPottedContents(ModBlocks.POTTED_ICE_SAPLING.get());
         // endregion
     }
 
@@ -94,5 +115,22 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     protected void iceSignDrop(Block signBlock, Function<Block, LootTable.Builder> signItem) {
         this.add(signBlock, signItem);
+    }
+
+    protected LootTable.Builder createIceSlabItemTable(Block pBlock) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                .add(this.applyExplosionDecay(pBlock, LootItem.lootTableItem(pBlock).apply(SetItemCountFunction
+                        .setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition
+                                .hasBlockStateProperties(pBlock)
+                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(SlabBlock.TYPE, SlabType.DOUBLE)).and(this.hasSilkTouch()))))));
+    }
+
+    protected LootTable.Builder createIceDoorItemTable(Block pBlock) {
+        return LootTable.lootTable().withPool(this.applyExplosionCondition(pBlock, LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(pBlock).when(
+                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(pBlock)
+                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(DoorBlock.HALF, DoubleBlockHalf.LOWER)).and(this.hasSilkTouch())))));
     }
 }

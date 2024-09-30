@@ -15,8 +15,8 @@ import net.minecraftforge.common.ToolAction;
 
 import javax.annotation.Nullable;
 
-public class ModIceRotatedPillarBlock extends RotatedPillarBlock {
-    public ModIceRotatedPillarBlock(Properties properties) {
+public class IceRotatedPillarBlock extends RotatedPillarBlock {
+    public IceRotatedPillarBlock(Properties properties) {
         super(properties);
     }
 

@@ -16,7 +16,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
@@ -143,8 +142,9 @@ public class ModBlocks {
     // endregion
 
     // region Wood Stuff
+    // region Ice
     public static final RegistryObject<Block> ICE_LOG = registerBlock("ice_log",
-            () -> new ModIceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)
+            () -> new IceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG)
                     .mapColor(MapColor.ICE)
                     .friction(0.98F)
                     .randomTicks()
@@ -155,7 +155,7 @@ public class ModBlocks {
                     .isRedstoneConductor(ModBlocks::never)));
 
     public static final RegistryObject<Block> STRIPPED_ICE_LOG = registerBlock("stripped_ice_log",
-            () -> new ModIceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
+            () -> new IceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_LOG)
                     .mapColor(MapColor.ICE)
                     .friction(0.98F)
                     .randomTicks()
@@ -166,7 +166,7 @@ public class ModBlocks {
                     .isRedstoneConductor(ModBlocks::never)));
 
     public static final RegistryObject<Block> ICE_WOOD = registerBlock("ice_wood",
-            () -> new ModIceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)
+            () -> new IceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_WOOD)
                     .mapColor(MapColor.ICE)
                     .friction(0.98F)
                     .randomTicks()
@@ -177,7 +177,7 @@ public class ModBlocks {
                     .isRedstoneConductor(ModBlocks::never)));
 
     public static final RegistryObject<Block> STRIPPED_ICE_WOOD = registerBlock("stripped_ice_wood",
-            () -> new ModIceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)
+            () -> new IceRotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRIPPED_OAK_WOOD)
                     .mapColor(MapColor.ICE)
                     .friction(0.98F)
                     .randomTicks()
@@ -205,8 +205,14 @@ public class ModBlocks {
                 }
             });
 
+    public static final RegistryObject<Block> ICE_SLAB = registerBlock("ice_slab",
+            () -> new IceSlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SLAB).noOcclusion().sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> ICE_STAIRS = registerBlock("ice_stairs",
+            () -> new IceStairBlock(ModBlocks.ICE_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion().sound(SoundType.GLASS)));
+
     public static final RegistryObject<Block> ICE_LEAVES = registerBlock("ice_leaves",
-            () -> new ModIceLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
+            () -> new IceLeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)
                     .mapColor(MapColor.SNOW)
                     .friction(0.98F)
                     .randomTicks()
@@ -214,8 +220,23 @@ public class ModBlocks {
                     .noOcclusion()
                     .isRedstoneConductor(ModBlocks::never)));
 
-    public static final RegistryObject<Block> ICE_SAPLING = registerBlock("ice_sapling",
-            () -> new SaplingBlock(new IceTreeGrower("ICE", Optional.empty(), Optional.empty(), Optional.empty()), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+    public static final RegistryObject<Block> ICE_TRAPDOOR = registerBlock("ice_trapdoor",
+            () -> new TrapDoorBlock(ModWoodTypes.ICE.setType(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_TRAPDOOR).noOcclusion().sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> ICE_DOOR = registerBlock("ice_door",
+            () -> new DoorBlock(ModWoodTypes.ICE.setType(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_DOOR).noOcclusion().sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> ICE_FENCE = registerBlock("ice_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_FENCE).noOcclusion().sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> ICE_FENCE_GATE = registerBlock("ice_fence_gate",
+            () -> new FenceGateBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_FENCE_GATE).noOcclusion().sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> ICE_BUTTON = registerBlock("ice_button",
+            () -> new ButtonBlock(ModWoodTypes.ICE.setType(), 30, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_BUTTON).noOcclusion().sound(SoundType.GLASS)));
+
+    public static final RegistryObject<Block> ICE_PRESSURE_PLATE = registerBlock("ice_pressure_plate",
+            () -> new PressurePlateBlock(ModWoodTypes.ICE.setType(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PRESSURE_PLATE).noOcclusion().sound(SoundType.GLASS)));
 
     public static final RegistryObject<Block> ICE_SIGN = BLOCKS.register("ice_sign",
             () -> new ModStandingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SIGN)
@@ -235,9 +256,12 @@ public class ModBlocks {
                     .sound(SoundType.GLASS)
                     .noOcclusion()));
 
+    public static final RegistryObject<Block> ICE_SAPLING = registerBlock("ice_sapling",
+            () -> new SaplingBlock(new IceTreeGrower("ICE", Optional.empty(), Optional.empty(), Optional.empty()), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Block> POTTED_ICE_SAPLING = registerPottedPlant("potted_ice_sapling", ModBlocks.ICE_SAPLING);
     // endregion
-
-
+    // endregion
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
@@ -247,6 +271,18 @@ public class ModBlocks {
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    private static RegistryObject<Block> registerPottedPlant(String name, RegistryObject<Block> contents) {
+        RegistryObject<Block> ret = registerBlockWithoutBlockItem(name,
+                () -> new FlowerPotBlock(() -> (FlowerPotBlock) net.minecraftforge.registries.ForgeRegistries.BLOCKS.getDelegateOrThrow(Blocks.FLOWER_POT).get(),
+                        contents, BlockBehaviour.Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING).noOcclusion().instabreak()));
+        LotOEverythingMod.addPottedPlant(contents, ret);
+        return ret;
+    }
+
+    private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
+        return BLOCKS.register(name, block);
     }
 
     private static boolean never(BlockState state, BlockGetter getter, BlockPos pos) {

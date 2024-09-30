@@ -60,6 +60,14 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.ICE_WOOD.get())
                 .add(ModBlocks.STRIPPED_ICE_LOG.get())
                 .add(ModBlocks.STRIPPED_ICE_WOOD.get())
+                .add(ModBlocks.ICE_SLAB.get())
+                .add(ModBlocks.ICE_STAIRS.get())
+                .add(ModBlocks.ICE_TRAPDOOR.get())
+                .add(ModBlocks.ICE_DOOR.get())
+                .add(ModBlocks.ICE_FENCE.get())
+                .add(ModBlocks.ICE_FENCE_GATE.get())
+                .add(ModBlocks.ICE_BUTTON.get())
+                .add(ModBlocks.ICE_PRESSURE_PLATE.get())
                 .add(ModBlocks.ICE_SIGN.get())
                 .add(ModBlocks.ICE_WALL_SIGN.get())
                 .add(ModBlocks.ICE_HANGING_SIGN.get())
@@ -112,10 +120,83 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.ICE_WOOD.get())
                 .add(ModBlocks.ICE_LEAVES.get())
                 .add(ModBlocks.STRIPPED_ICE_LOG.get())
-                .add(ModBlocks.STRIPPED_ICE_WOOD.get());
+                .add(ModBlocks.STRIPPED_ICE_WOOD.get())
+                .add(ModBlocks.ICE_SLAB.get())
+                .add(ModBlocks.ICE_STAIRS.get())
+                .add(ModBlocks.ICE_TRAPDOOR.get())
+                .add(ModBlocks.ICE_DOOR.get())
+                .add(ModBlocks.ICE_FENCE.get())
+                .add(ModBlocks.ICE_FENCE_GATE.get())
+                .add(ModBlocks.ICE_BUTTON.get())
+                .add(ModBlocks.ICE_PRESSURE_PLATE.get())
+                .add(ModBlocks.ICE_SIGN.get())
+                .add(ModBlocks.ICE_WALL_SIGN.get())
+                .add(ModBlocks.ICE_HANGING_SIGN.get())
+                .add(ModBlocks.ICE_WALL_HANGING_SIGN.get());
 
         this.tag(BlockTags.PLANKS)
                 .add(ModBlocks.ICE_PLANKS.get());
+
+        this.tag(BlockTags.SLABS)
+                .add(ModBlocks.ICE_SLAB.get());
+
+        this.tag(BlockTags.WOODEN_SLABS)
+                .add(ModBlocks.ICE_SLAB.get());
+
+        this.tag(BlockTags.STAIRS)
+                .add(ModBlocks.ICE_STAIRS.get());
+
+        this.tag(BlockTags.WOODEN_STAIRS)
+                .add(ModBlocks.ICE_STAIRS.get());
+
+        this.tag(BlockTags.TRAPDOORS);
+
+        this.tag(BlockTags.WOODEN_TRAPDOORS);
+
+        this.tag(BlockTags.DOORS)
+                .add(ModBlocks.ICE_DOOR.get());
+
+        this.tag(BlockTags.WOODEN_DOORS)
+                .add(ModBlocks.ICE_DOOR.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBlocks.ICE_FENCE.get());
+
+        this.tag(BlockTags.WOODEN_FENCES)
+                .add(ModBlocks.ICE_FENCE.get());
+
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBlocks.ICE_FENCE_GATE.get());
+
+        this.tag(BlockTags.BUTTONS)
+                .add(ModBlocks.ICE_BUTTON.get());
+
+        this.tag(BlockTags.WOODEN_BUTTONS)
+                .add(ModBlocks.ICE_BUTTON.get());
+
+        this.tag(BlockTags.PRESSURE_PLATES)
+                .add(ModBlocks.ICE_PRESSURE_PLATE.get());
+
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES)
+                .add(ModBlocks.ICE_PRESSURE_PLATE.get());
+
+        this.tag(BlockTags.SIGNS)
+                .add(ModBlocks.ICE_SIGN.get())
+                .add(ModBlocks.ICE_WALL_SIGN.get())
+                .add(ModBlocks.ICE_HANGING_SIGN.get())
+                .add(ModBlocks.ICE_WALL_HANGING_SIGN.get());
+
+        this.tag(BlockTags.STANDING_SIGNS)
+                .add(ModBlocks.ICE_SIGN.get());
+
+        this.tag(BlockTags.WALL_SIGNS)
+                .add(ModBlocks.ICE_WALL_SIGN.get());
+
+        this.tag(BlockTags.CEILING_HANGING_SIGNS)
+                .add(ModBlocks.ICE_HANGING_SIGN.get());
+
+        this.tag(BlockTags.WALL_HANGING_SIGNS)
+                .add(ModBlocks.ICE_WALL_HANGING_SIGN.get());
 
         this.tag(BlockTags.SAPLINGS)
                 .add(ModBlocks.ICE_SAPLING.get());

@@ -2,12 +2,10 @@ package net.ianvivi13.lot_o_everything.datagen;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
 import net.ianvivi13.lot_o_everything.block.ModBlocks;
-import net.ianvivi13.lot_o_everything.block.custom.ModIceRotatedPillarBlock;
+import net.ianvivi13.lot_o_everything.block.custom.IceRotatedPillarBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.StandingSignBlock;
-import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -61,33 +59,52 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.DEEPSLATE_SAPPHIRE_ORE);
         // endregion
         // region Wood Stuff
-        logBlock((ModIceRotatedPillarBlock)ModBlocks.ICE_LOG.get());
-        logBlock((ModIceRotatedPillarBlock)ModBlocks.STRIPPED_ICE_LOG.get());
-        axisBlock((ModIceRotatedPillarBlock)ModBlocks.ICE_WOOD.get(), blockTexture(ModBlocks.ICE_LOG.get()), blockTexture(ModBlocks.ICE_LOG.get()));
-        axisBlock((ModIceRotatedPillarBlock)ModBlocks.STRIPPED_ICE_WOOD.get(), blockTexture(ModBlocks.STRIPPED_ICE_LOG.get()), blockTexture(ModBlocks.STRIPPED_ICE_LOG.get()));
+        logBlock((IceRotatedPillarBlock) ModBlocks.ICE_LOG.get());
         blockItem(ModBlocks.ICE_LOG);
+
+        logBlock((IceRotatedPillarBlock) ModBlocks.STRIPPED_ICE_LOG.get());
         blockItem(ModBlocks.STRIPPED_ICE_LOG);
+
+        axisBlock((IceRotatedPillarBlock) ModBlocks.ICE_WOOD.get(), blockTexture(ModBlocks.ICE_LOG.get()), blockTexture(ModBlocks.ICE_LOG.get()));
         blockItem(ModBlocks.ICE_WOOD);
+
+        axisBlock((IceRotatedPillarBlock) ModBlocks.STRIPPED_ICE_WOOD.get(), blockTexture(ModBlocks.STRIPPED_ICE_LOG.get()), blockTexture(ModBlocks.STRIPPED_ICE_LOG.get()));
         blockItem(ModBlocks.STRIPPED_ICE_WOOD);
+
         blockWithItem(ModBlocks.ICE_PLANKS);
+
+        slabBlock((SlabBlock) ModBlocks.ICE_SLAB.get(), blockTexture(ModBlocks.ICE_PLANKS.get()), blockTexture(ModBlocks.ICE_PLANKS.get()));
+        blockItem(ModBlocks.ICE_SLAB);
+
+        stairsBlock((StairBlock) ModBlocks.ICE_STAIRS.get(), blockTexture(ModBlocks.ICE_PLANKS.get()));
+        blockItem(ModBlocks.ICE_STAIRS);
+
         leavesBlock(ModBlocks.ICE_LEAVES);
 
-        saplingBlock(ModBlocks.ICE_SAPLING);
+        trapdoorBlockWithRenderType((TrapDoorBlock) ModBlocks.ICE_TRAPDOOR.get(), modLoc("block/ice_trapdoor"), true, "cutout");
+        blockItem(ModBlocks.ICE_TRAPDOOR, "_bottom");
+
+        doorBlockWithRenderType((DoorBlock) ModBlocks.ICE_DOOR.get(), modLoc("block/ice_door_bottom"), modLoc("block/ice_door_top"), "cutout");
+        blockItem(ModBlocks.ICE_DOOR);
+
+        fenceBlock((FenceBlock) ModBlocks.ICE_FENCE.get(), blockTexture(ModBlocks.ICE_PLANKS.get()));
+        blockItem(ModBlocks.ICE_FENCE);
+
+        fenceGateBlock((FenceGateBlock) ModBlocks.ICE_FENCE_GATE.get(), blockTexture(ModBlocks.ICE_PLANKS.get()));
+        blockItem(ModBlocks.ICE_FENCE_GATE);
+
+        buttonBlock((ButtonBlock) ModBlocks.ICE_BUTTON.get(), blockTexture(ModBlocks.ICE_PLANKS.get()));
+        blockItem(ModBlocks.ICE_BUTTON);
+
+        pressurePlateBlock((PressurePlateBlock) ModBlocks.ICE_PRESSURE_PLATE.get(), blockTexture(ModBlocks.ICE_PLANKS.get()));
+        blockItem(ModBlocks.ICE_PRESSURE_PLATE);
 
         signBlock((StandingSignBlock) ModBlocks.ICE_SIGN.get(), (WallSignBlock) ModBlocks.ICE_WALL_SIGN.get(),
                 blockTexture(ModBlocks.ICE_PLANKS.get()));
         hangingSignBlock(ModBlocks.ICE_HANGING_SIGN.get(), ModBlocks.ICE_WALL_HANGING_SIGN.get(), blockTexture(ModBlocks.ICE_PLANKS.get()));
+
+        saplingBlock(ModBlocks.ICE_SAPLING);
         // endregion
-    }
-
-    private void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
-        ModelFile sign = models().sign(name(signBlock), texture);
-        hangingSignBlock(signBlock, wallSignBlock, sign);
-    }
-
-    private void hangingSignBlock(Block signBlock, Block wallSignBlock, ModelFile sign) {
-        simpleBlock(signBlock, sign);
-        simpleBlock(wallSignBlock, sign);
     }
 
     private String name(Block block) {
@@ -107,6 +124,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 ":block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
     }
 
+    private void blockItem(RegistryObject<Block> blockRegistryObject, String appendix) {
+        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile(LotOEverythingMod.MOD_ID +
+                ":block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath() + appendix));
+    }
+
     private void leavesBlock(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), models().singleTexture(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(),
                 ResourceLocation.withDefaultNamespace("block/leaves"), "all", blockTexture(blockRegistryObject.get())).renderType("cutout"));
@@ -115,5 +137,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void saplingBlock(RegistryObject<Block> blockRegistryObject) {
         simpleBlock(blockRegistryObject.get(), models().cross(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(),
                 blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    }
+
+    private void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
+        ModelFile sign = models().sign(name(signBlock), texture);
+        hangingSignBlock(signBlock, wallSignBlock, sign);
+    }
+
+    private void hangingSignBlock(Block signBlock, Block wallSignBlock, ModelFile sign) {
+        simpleBlock(signBlock, sign);
+        simpleBlock(wallSignBlock, sign);
     }
 }

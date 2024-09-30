@@ -14,6 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,11 @@ public class ModRecipeProvider extends RecipeProvider {
         AllDefaultOreRecipes(pRecipeOutput, ModBlocks.SAPPHIRE_ORE.get(), ModBlocks.DEEPSLATE_SAPPHIRE_ORE.get(), ModItems.SAPPHIRE.get(), 1.0F, ModBlocks.SAPPHIRE_BLOCK.get());
         // endregion
         // region Wood Stuff
-        //Door(pRecipeOutput, ModBlocks.TITANIUM_BLOCK.get(), ModBlocks.ICE_PLANKS.get());
+        AllWoodRecipes(pRecipeOutput, ModBlocks.ICE_LOG.get(), ModBlocks.STRIPPED_ICE_LOG.get(), ModBlocks.ICE_WOOD.get(),
+                ModBlocks.STRIPPED_ICE_WOOD.get(), ModBlocks.ICE_PLANKS.get(), ModBlocks.ICE_STAIRS.get(), ModBlocks.ICE_SLAB.get(),
+                ModBlocks.ICE_FENCE.get(), ModBlocks.ICE_FENCE_GATE.get(), ModBlocks.ICE_DOOR.get(), ModBlocks.ICE_TRAPDOOR.get(),
+                ModItems.ICE_SIGN.get(), ModItems.ICE_HANGING_SIGN.get(), ModBlocks.ICE_BUTTON.get(), ModBlocks.ICE_PRESSURE_PLATE.get(),
+                ModItems.ICE_BOAT.get(), ModItems.ICE_CHEST_BOAT.get());
         // endregion
         // region Quality of Life
         oreSmelting(pRecipeOutput, List.of(Items.RAW_COPPER_BLOCK), RecipeCategory.MISC, Items.COPPER_BLOCK, 0.7F * 9, 200, "copper_block");
@@ -90,31 +95,35 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void Door(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         doorBuilder(out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Trapdoor(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         trapdoorBuilder(out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Fence(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         fenceBuilder(out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Fencegate(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         fenceGateBuilder(out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Sign(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         signBuilder(out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
+    }
+
+    protected void Hangingsign(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
+        hangingSign(pRecipeOutput, out, in);
     }
 
     protected void Boat(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
@@ -123,7 +132,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("# #")
                 .pattern("###")
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Chestboat(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
@@ -131,38 +140,38 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(in)
                 .requires(Items.CHEST)
                 .unlockedBy("has_" + out.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(out).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void OneToX(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in, int x) {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, out, x)
                 .requires(in)
                 .unlockedBy("has_" + out.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(out).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Pressureplate(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         pressurePlateBuilder(RecipeCategory.REDSTONE, out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Slab(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         slabBuilder(RecipeCategory.BUILDING_BLOCKS, out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Wall(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         wallBuilder(RecipeCategory.BUILDING_BLOCKS, out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Stair(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
         stairBuilder(out, Ingredient.of(in))
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void LogToWood(RecipeOutput pRecipeOutput, ItemLike out, ItemLike in) {
@@ -171,7 +180,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("##")
                 .pattern("##")
                 .unlockedBy("has_" + in.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(in).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + in.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(in));
     }
 
     protected void Surround(RecipeOutput pRecipeOutput, ItemLike out, ItemLike center, ItemLike outside, int quantity) {
@@ -182,10 +191,10 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("#C#")
                 .pattern("###")
                 .unlockedBy("has_" + outside.asItem(), inventoryTrigger(ItemPredicate.Builder.item().of(outside).build()))
-                .save(pRecipeOutput, "bit_o_everything:" + out.asItem() + "_from_" + center.asItem() + "_and_" + outside.asItem());
+                .save(pRecipeOutput, LotOEverythingMod.MOD_ID + ":" + getItemName(out) + "_from_" + getItemName(center) + "_and_" + getItemName(outside));
     }
 
-    protected void AllWoodRecipes(RecipeOutput pRecipeOutput, ItemLike log, ItemLike strippedLog, ItemLike wood, ItemLike strippedWood, ItemLike plank, ItemLike stair, ItemLike slab, ItemLike fence, ItemLike fenceGate, ItemLike door, ItemLike trapdoor, ItemLike sign, ItemLike button, ItemLike pressurePlate, ItemLike boat, ItemLike chestBoat) {
+    protected void AllWoodRecipes(RecipeOutput pRecipeOutput, ItemLike log, ItemLike strippedLog, ItemLike wood, ItemLike strippedWood, ItemLike plank, ItemLike stair, ItemLike slab, ItemLike fence, ItemLike fenceGate, ItemLike door, ItemLike trapdoor, ItemLike sign, ItemLike hangingSign, ItemLike button, ItemLike pressurePlate, ItemLike boat, ItemLike chestBoat) {
         LogToWood(pRecipeOutput, wood, log);
         LogToWood(pRecipeOutput, strippedWood, strippedLog);
         OneToX(pRecipeOutput, plank, log, 4);
@@ -200,6 +209,7 @@ public class ModRecipeProvider extends RecipeProvider {
         Door(pRecipeOutput, door, plank);
         Trapdoor(pRecipeOutput, trapdoor, plank);
         Sign(pRecipeOutput, sign, plank);
+        Hangingsign(pRecipeOutput, hangingSign, plank);
         OneToX(pRecipeOutput, button, plank,1);
         Pressureplate(pRecipeOutput, pressurePlate, plank);
         Boat(pRecipeOutput, boat, plank);
