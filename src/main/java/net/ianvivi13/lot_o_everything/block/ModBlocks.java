@@ -218,14 +218,22 @@ public class ModBlocks {
             () -> new SaplingBlock(new IceTreeGrower("ICE", Optional.empty(), Optional.empty(), Optional.empty()), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
 
     public static final RegistryObject<Block> ICE_SIGN = BLOCKS.register("ice_sign",
-            () -> new ModStandingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SIGN).sound(SoundType.GLASS)));
+            () -> new ModStandingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SIGN)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()));
     public static final RegistryObject<Block> ICE_WALL_SIGN = BLOCKS.register("ice_wall_sign",
-            () -> new ModWallSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_WALL_SIGN).sound(SoundType.GLASS)));
+            () -> new ModWallSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_WALL_SIGN)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()));
 
     public static final RegistryObject<Block> ICE_HANGING_SIGN = BLOCKS.register("ice_hanging_sign",
-            () -> new ModHangingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_HANGING_SIGN).sound(SoundType.GLASS)));
+            () -> new ModHangingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_HANGING_SIGN)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()));
     public static final RegistryObject<Block> ICE_WALL_HANGING_SIGN = BLOCKS.register("ice_wall_hanging_sign",
-            () -> new ModWallHangingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_WALL_HANGING_SIGN).sound(SoundType.GLASS)));
+            () -> new ModWallHangingSignBlock(ModWoodTypes.ICE, BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_WALL_HANGING_SIGN)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()));
 
     // endregion
 

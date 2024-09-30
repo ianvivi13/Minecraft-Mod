@@ -41,7 +41,8 @@ public class ModPlacedFeatures {
     //endregion
     //region Trees
     public static final ResourceKey<PlacedFeature> ICE_PLACED_RARE_KEY = registerKey("ice_placed_rare");
-    public static final ResourceKey<PlacedFeature> ICE_PLACED_KEY = registerKey("ice_placed");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_TAIGA_KEY = registerKey("ice_placed_taiga");
+    public static final ResourceKey<PlacedFeature> ICE_PLACED_GROVE_KEY = registerKey("ice_placed_grove");
     //endregion
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -98,9 +99,12 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
                         ModBlocks.ICE_SAPLING.get()));
 
-        register(context, ICE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
+        register(context, ICE_PLACED_TAIGA_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1),
                         ModBlocks.ICE_SAPLING.get()));
+
+        register(context, ICE_PLACED_TAIGA_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.1f, 1)));
         //endregion
     }
 

@@ -119,7 +119,5 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(BlockTags.SAPLINGS)
                 .add(ModBlocks.ICE_SAPLING.get());
-
-
     }
 }

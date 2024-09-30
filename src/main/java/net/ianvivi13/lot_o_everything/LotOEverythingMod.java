@@ -55,6 +55,10 @@ public class LotOEverythingMod {
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.STRIPPED_ICE_WOOD.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_PLANKS.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_LEAVES.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_SIGN.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_WALL_SIGN.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_HANGING_SIGN.get(), RenderType.translucent());
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ICE_WALL_HANGING_SIGN.get(), RenderType.translucent());
     }
 
     // Add the example block item to the building blocks tab

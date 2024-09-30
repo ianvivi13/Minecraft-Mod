@@ -1,13 +1,13 @@
 package net.ianvivi13.lot_o_everything.worldgen;
 
 import net.ianvivi13.lot_o_everything.LotOEverythingMod;
+import net.ianvivi13.lot_o_everything.util.ModTags;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.world.BiomeModifier;
@@ -125,8 +125,13 @@ public class ModBiomeModifiers {
                 GenerationStep.Decoration.VEGETAL_DECORATION));
 
         context.register(ADD_OVERWORLD_ICE_TREE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(BiomeTags.IS_FOREST), // TODO: Change to Snowy Taiga
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_KEY)),
+                biomes.getOrThrow(ModTags.Biomes.IS_SNOWY_TAIGA),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_TAIGA_KEY)),
+                GenerationStep.Decoration.VEGETAL_DECORATION));
+
+        context.register(ADD_OVERWORLD_ICE_TREE, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+                biomes.getOrThrow(ModTags.Biomes.IS_GROVE),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PLACED_GROVE_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION));
         //endregion
     }

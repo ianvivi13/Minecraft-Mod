@@ -39,11 +39,14 @@ public class ModChestBoatEntity extends ChestBoat {
         return super.getDropItem();
     }
 
+    @Override
     public float getGroundFriction() {
         if(getModVariant() == ModBoatEntity.Type.ICE) {
-            if(getBlockSpeedFactor() != 1) {
+            float friction = super.getGroundFriction();
+            if(friction == 0.0f) return friction;
+            if(friction > 0.0f && getBlockSpeedFactor() != 1) {
                 return 0.81f;
-            } else if(getBlockSpeedFactor() == 1) {
+            } else if(friction > 0.0f && getBlockSpeedFactor() == 1) {
                 return 0.98f;
             }
         }

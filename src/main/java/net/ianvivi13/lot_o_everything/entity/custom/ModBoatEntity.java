@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
@@ -46,15 +47,21 @@ public class ModBoatEntity extends Boat {
     @Override
     public float getGroundFriction() {
         if(getModVariant() == Type.ICE) {
-            if(getBlockSpeedFactor() != 1) {
+            float friction = super.getGroundFriction();
+            if(friction == 0.0f) return friction;
+            if(friction > 0.0f && getBlockSpeedFactor() != 1) {
                 return 0.81f;
-            } else if(getBlockSpeedFactor() == 1) {
+            } else if(friction > 0.0f && getBlockSpeedFactor() == 1) {
                 return 0.98f;
             }
         }
         return super.getGroundFriction();
     }
 
+    @Override
+    protected void checkFallDamage(double pY, boolean pOnGround, BlockState pState, BlockPos pPos) {
+        super.checkFallDamage(pY, pOnGround, pState, pPos);
+    }
 
     public void setVariant(Type pVariant) {
         this.entityData.set(DATA_ID_TYPE, pVariant.ordinal());
